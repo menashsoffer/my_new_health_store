@@ -1,12 +1,16 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
-
-import NxWelcome from './nx-welcome';
+import { Provider as UsersProvider } from 'jotai';
+import './app.module.css';
+import RouterDOM from './router/RouterDOM';
+import Layout from './features/layout/Layout';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="my-health-store" />
+      <UsersProvider>
+        <Layout>
+          <RouterDOM />
+        </Layout>
+      </UsersProvider>
     </div>
   );
 }
