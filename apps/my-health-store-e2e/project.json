@@ -1,0 +1,30 @@
+{
+  "name": "my-health-store-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/my-health-store-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/my-health-store-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "my-health-store:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "my-health-store:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "my-health-store:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "implicitDependencies": ["my-health-store"],
+  "tags": []
+}
