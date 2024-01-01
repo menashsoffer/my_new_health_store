@@ -13,8 +13,6 @@ export interface CategoryProps {
 
 export function Category(props: CategoryProps) {
   const navigate = useNavigate();
-  console.log(props.i);
-
   return (
     <div
       key={props.i}

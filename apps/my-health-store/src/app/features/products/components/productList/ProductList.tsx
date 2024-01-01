@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProductList.module.css';
 import ProductItem from './productItem/productItem';
 import ProductDetailsNav from '../productDetails/productDetailsNav/ProductDetailsNav';
+import { useEffect } from 'react';
 
 /* eslint-disable-next-line */
 export interface ProductListProps {}
@@ -15,7 +16,7 @@ const products = [
     imageAlt: "Front of men's Basic Tee in black.",
     price: '$35',
     color: 'Black',
-    categoryId: 1,
+    categoryName: '',
   },
 ];
 for (let i = 2; i <= 11; i++) {
@@ -26,7 +27,7 @@ for (let i = 2; i <= 11; i++) {
     imageAlt: 'Product image',
     price: '$' + (25 + i),
     color: ['Black', 'White', 'Blue'][Math.floor(Math.random() * 3)],
-    categoryId: Math.ceil(Math.random() * 3),
+    categoryName: '',
   });
 }
 const breadcrumbs = [
@@ -35,6 +36,8 @@ const breadcrumbs = [
 ];
 export function ProductList(props: ProductListProps) {
   const navigate = useNavigate();
+
+  useEffect(() => {});
 
   return (
     <div className={styles['container']}>

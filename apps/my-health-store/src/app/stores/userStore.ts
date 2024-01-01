@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 
 export interface User {
-  id: number;
+  id: string;
   name: {
     firstName: string;
     lastName: string;
@@ -39,7 +39,7 @@ export interface User {
 // ];
 
 const defaultUser = {
-  id: 0,
+  id: '',
   name: {
     firstName: '',
     lastName: '',

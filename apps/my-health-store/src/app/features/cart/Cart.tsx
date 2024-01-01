@@ -78,8 +78,9 @@ export function Cart(props: CartProps) {
                         <div className="mt-8">
                           <div className="flow-root">
                             <ul className="-my-6 divide-y divide-gray-200">
-                              {props.products.map((product) => (
+                              {props.products.map((product, i) => (
                                 <CartItems
+                                  key={i}
                                   product={product}
                                   quantity={props.quantity}
                                 />

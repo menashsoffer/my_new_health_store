@@ -9,7 +9,7 @@ export interface ProductItemProps {
     imageAlt: string;
     price: string;
     color: string;
-    categoryId: number;
+    categoryName: string;
   };
 }
 

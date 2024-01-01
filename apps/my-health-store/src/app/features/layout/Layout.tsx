@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import styles from './Layout.module.css';
 import HeaderBar from './headerBar/HeaderBar';
 import Cart from '../cart/Cart';
-import Main from './main/main';
+import Main from './main/Main';
 
 export interface LayoutProps {
   children: ReactNode;
