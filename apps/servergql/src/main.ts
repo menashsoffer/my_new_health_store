@@ -1,10 +1,10 @@
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import { z } from 'zod';
 import cors from 'cors';
+
+import connectToPG from './connectToDB';
 import { initTRPC } from '@trpc/server';
 import { ProductsTypes, db } from './db';
-import connectToPG from './connectToDB';
-// import { createProductsTable } from './sequelize';
+import { z } from 'zod';
 
 const t = initTRPC.create();
 
@@ -13,13 +13,6 @@ const middleware = t.middleware;
 const publicProcedure = t.procedure;
 
 const appRouter = router({
-  greeting: publicProcedure
-    .input(z.object({ name: z.string() }))
-    .query((opts) => {
-      const { input } = opts;
-      console.log(input.name);
-      return `Hello ${input.name}`;
-    }),
   productsList: publicProcedure.query(async () => {
     const products =
       (await db.products.findMany()) as unknown as ProductsTypes[];

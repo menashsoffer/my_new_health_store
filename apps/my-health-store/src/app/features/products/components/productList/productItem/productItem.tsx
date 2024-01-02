@@ -17,7 +17,7 @@ export interface ProductItemProps {
 
 export function ProductItem(props: ProductItemProps) {
   return (
-    <div className={styles['container']}>
+    <div className={styles['container']} key={props.product.id}>
       {' '}
       <div key={props.product.id} className="group relative">
         <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">

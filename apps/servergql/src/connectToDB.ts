@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import 'dotenv/config';
+
 export const sequelize = new Sequelize(process.env.POSTGRES_LOCAL as string);
 const connectToPG = async () => {
   try {

@@ -1,4 +1,3 @@
-import { sequelize } from './connectToDB';
 import Products from './sequelize';
 
 export type ProductsTypes = {
