@@ -1,38 +1,26 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import styles from './Layout.module.css';
 import HeaderBar from './headerBar/HeaderBar';
 import Cart from '../cart/Cart';
 import Main from './main/Main';
+import { ProductsTypes } from 'apps/servergql/src/db';
+import { myProducts } from '../../stores/productsStore';
 
 export interface LayoutProps {
   children: ReactNode;
 }
 
-const products = [
-  {
-    id: 1,
-    name: 'Basic Tee',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
-    categoryId: 1,
-  },
-];
-for (let i = 2; i <= 11; i++) {
-  products.push({
-    id: i,
-    name: `Product ${i}`,
-    imageSrc: `https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-0${i}.jpg`,
-    imageAlt: 'Product image',
-    price: '$' + (25 + i),
-    color: ['Black', 'White', 'Blue'][Math.floor(Math.random() * 3)],
-    categoryId: Math.ceil(Math.random() * 3),
-  });
-}
-
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [products, setProducts] = useState<ProductsTypes[]>();
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const newProducts = await myProducts();
+      setProducts(newProducts);
+    };
+    getProducts();
+  }, []);
+
   return (
     <div className={styles['container']}>
       <HeaderBar />

@@ -2,6 +2,7 @@ import { sequelize } from './connectToDB';
 import Products from './sequelize';
 
 export type ProductsTypes = {
+  id?: string;
   product_name: string;
   product_description: string;
   price: number;

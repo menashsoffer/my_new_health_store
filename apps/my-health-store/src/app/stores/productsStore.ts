@@ -1,8 +1,8 @@
 import { trpc } from '../../index';
 
-const a = async () => {
-  // const test = await trpc.greeting.query({ name: 'nachman' });
-  // const newUser = await trpc.userCreate.mutate({ id: 'sd', name: 'qwertyui' });
+export const myProducts = async () => {
+  // const test = await trpc.greeting.query({ name: '' });
+  // const newUser = await trpc.userCreate.mutate({ id: 'sd', name: '' });
   const getProducts = await trpc.productsList.query();
   console.log(getProducts);
   const addProduct = await trpc.addProduct.mutate({
@@ -18,4 +18,3 @@ const a = async () => {
   console.log(addProduct);
   return getProducts;
 };
-a();

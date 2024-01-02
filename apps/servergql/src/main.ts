@@ -21,7 +21,8 @@ const appRouter = router({
       return `Hello ${input.name}`;
     }),
   productsList: publicProcedure.query(async () => {
-    const products = await db.products.findMany();
+    const products =
+      (await db.products.findMany()) as unknown as ProductsTypes[];
     console.log(products);
     return products;
   }),

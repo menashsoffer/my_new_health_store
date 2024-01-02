@@ -2,42 +2,28 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProductList.module.css';
 import ProductItem from './productItem/productItem';
 import ProductDetailsNav from '../productDetails/productDetailsNav/ProductDetailsNav';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { myProducts } from '../../../../stores/productsStore';
+import { ProductsTypes } from '../../../../../../../servergql/src/db';
 
 /* eslint-disable-next-line */
 export interface ProductListProps {}
 
-const products = [
-  {
-    id: 1,
-    name: 'Basic Tee',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
-    categoryName: '',
-  },
-];
-for (let i = 2; i <= 11; i++) {
-  products.push({
-    id: i,
-    name: `Product ${i}`,
-    imageSrc: `https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-0${i}.jpg`,
-    imageAlt: 'Product image',
-    price: '$' + (25 + i),
-    color: ['Black', 'White', 'Blue'][Math.floor(Math.random() * 3)],
-    categoryName: '',
-  });
-}
 const breadcrumbs = [
   { id: 1, name: 'Home', href: 'home' },
   { id: 2, name: 'Products', href: 'home/products' },
 ];
 export function ProductList(props: ProductListProps) {
+  const [products, setProducts] = useState<ProductsTypes[]>();
   const navigate = useNavigate();
 
-  useEffect(() => {});
+  useEffect(() => {
+    const x = async () => {
+      const newProducts = await myProducts();
+      setProducts(newProducts);
+    };
+    x();
+  }, []);
 
   return (
     <div className={styles['container']}>
@@ -52,9 +38,7 @@ export function ProductList(props: ProductListProps) {
             className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
             onClick={() => navigate('productDetails')}
           >
-            {products.map((product) => (
-              <ProductItem product={product} />
-            ))}
+            {products?.map((product) => <ProductItem product={product} />)}
           </div>
         </div>
       </div>

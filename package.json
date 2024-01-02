@@ -5,6 +5,8 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@trpc/client": "^10.45.0",
+    "@trpc/server": "^10.45.0",
     "@headlessui/react": "^1.7.17",
     "@headlessui/vue": "^1.7.16",
     "@heroicons/react": "^2.1.1",
