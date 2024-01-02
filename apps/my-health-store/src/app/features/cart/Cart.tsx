@@ -5,18 +5,11 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useAtom } from 'jotai';
 import { cartAtom } from '../../stores/cartStore';
 import CartItems from './cartItems/CartItems';
+import { ProductsTypes } from '../../../../../servergql/src/db';
 
 /* eslint-disable-next-line */
 export interface CartProps {
-  products: {
-    id: number;
-    name: string;
-    imageSrc: string;
-    imageAlt: string;
-    price: string;
-    color: string;
-    categoryId: number;
-  }[];
+  products?: ProductsTypes[];
   quantity: number;
   setOpen: boolean;
 }
@@ -78,12 +71,17 @@ export function Cart(props: CartProps) {
                         <div className="mt-8">
                           <div className="flow-root">
                             <ul className="-my-6 divide-y divide-gray-200">
-                              {props.products.map((product) => (
-                                <CartItems
-                                  product={product}
-                                  quantity={props.quantity}
-                                />
-                              ))}
+                              {props.products ? (
+                                props.products.map((product, i) => (
+                                  <CartItems
+                                    key={i}
+                                    product={product}
+                                    quantity={props.quantity}
+                                  />
+                                ))
+                              ) : (
+                                <p> no products fund</p>
+                              )}
                             </ul>
                           </div>
                         </div>

@@ -9,7 +9,7 @@ import ProductList from '../features/products/components/productList/ProductList
 import ProductDetails from '../features/products/components/productDetails/ProductDetails';
 
 const myUser = {
-  id: 1,
+  id: '1',
   name: {
     firstName: 'John',
     lastName: 'Doe',
