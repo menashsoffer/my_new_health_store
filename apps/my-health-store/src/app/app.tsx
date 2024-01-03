@@ -7,9 +7,7 @@ export function App() {
   return (
     <div>
       <UsersProvider>
-        <Layout>
-          <RouterDOM />
-        </Layout>
+        <RouterDOM />
       </UsersProvider>
     </div>
   );

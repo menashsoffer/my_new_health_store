@@ -22,13 +22,7 @@ export function HomePage() {
                 loading="lazy"
               />
             </div>
-            <div className="col-start-3 sepia">
-              <img
-                src="https://cdn.foreverliving.com/content/cards/images/home_aloeveragel_banner_1120x350_1669899485419.jpg"
-                alt=""
-                loading="lazy"
-              />
-            </div>
+            <div className="col-start-3 sepia"></div>
             <div className="saturate-200">
               <img
                 src="https://cdn.foreverliving.com/content/cards/images/home_aloeveragel_banner_1120x350_1669899485419.jpg"
@@ -51,21 +45,6 @@ export function HomePage() {
               />
             </div>
           </div>
-
-          {/* <section className="flex flex-wrap justify-center">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </section> */}
         </main>
       </div>
     </div>
@@ -73,12 +52,3 @@ export function HomePage() {
 }
 
 export default HomePage;
-
-// function Card() {
-//   return (
-//     <div className="p-4 max-w-sm rounded shadow-lg">
-//       <h3 className="font-bold mb-2">Card Title</h3>
-//       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//     </div>
-//   );
-// }

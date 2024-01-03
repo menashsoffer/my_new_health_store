@@ -38,7 +38,7 @@ export function Avatar(props: AvatarProps) {
             <Menu.Item>
               {({ active }) => (
                 <a
-                  href="home/profile"
+                  href="/profile"
                   className={classNames(
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
@@ -51,7 +51,7 @@ export function Avatar(props: AvatarProps) {
             <Menu.Item>
               {({ active }) => (
                 <a
-                  href="home"
+                  href="/"
                   className={classNames(
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
@@ -65,7 +65,7 @@ export function Avatar(props: AvatarProps) {
               {({ active }) => (
                 <a
                   onClick={() => setShow(false)}
-                  href="home"
+                  href="/"
                   className={classNames(
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',

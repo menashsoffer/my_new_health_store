@@ -26,7 +26,7 @@ const callouts = [
       'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
   },
 ];
-const breadcrumbs = [{ id: 1, name: 'Home', href: 'home' }];
+const breadcrumbs = [{ id: 1, name: 'Home', href: '/' }];
 
 export function ProductsPage(props: ProductsPageProps) {
   return (
@@ -38,7 +38,7 @@ export function ProductsPage(props: ProductsPageProps) {
 
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
             {callouts.map((callout, i) => (
-              <Category callout={callout} i={i} />
+              <Category callout={callout} key={i} />
             ))}
           </div>
         </div>

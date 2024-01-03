@@ -23,7 +23,7 @@ export function CartItems(props: CartItemsProps) {
           <div>
             <div className="flex justify-between text-base font-medium text-gray-900">
               <h3>
-                <a href="home/products/list/productDetails">
+                <a href="products/list/productDetails">
                   {props.product.product_name}
                 </a>
               </h3>

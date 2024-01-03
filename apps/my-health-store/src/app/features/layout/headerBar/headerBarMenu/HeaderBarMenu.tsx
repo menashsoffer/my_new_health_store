@@ -6,8 +6,8 @@ import styles from './HeaderBarMenu.module.css';
 
 const navigation = [
   { name: 'About', href: 'home' },
-  { name: 'Products', href: 'home/products' },
-  { name: 'Contact', href: 'home' },
+  { name: 'Products', href: 'products' },
+  { name: 'Contact', href: '/' },
 ];
 
 interface HeaderBarMenuProps {}

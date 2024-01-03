@@ -40,7 +40,7 @@ export function Profile(props: ProfileProps) {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                // onClick={() => navigate('/home')}
+                // onClick={() => navigate('/')}
               >
                 Save changes
               </button>
@@ -49,7 +49,7 @@ export function Profile(props: ProfileProps) {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             <a
-              href="/home"
+              href="/"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Go back to store

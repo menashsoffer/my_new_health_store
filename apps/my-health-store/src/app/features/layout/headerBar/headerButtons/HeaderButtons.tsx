@@ -61,7 +61,7 @@ export function HeaderButtons(props: HeaderButtonsProps) {
           <button
             type="button"
             className="relative rounded-full bg-gray-800 p-2 text-gray-400 hover:text-white"
-            onClick={() => navigate('home/login')}
+            onClick={() => navigate('login')}
           >
             login
           </button>
