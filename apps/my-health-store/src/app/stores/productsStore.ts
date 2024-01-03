@@ -4,7 +4,7 @@ export const myProducts = async () => {
   // const test = await trpc.greeting.query({ name: '' });
   // const newUser = await trpc.userCreate.mutate({ id: 'sd', name: '' });
   const getProducts = await trpc.productsList.query();
-  console.log(getProducts);
+  // console.log(getProducts);
   // const addProduct = await trpc.addProduct.mutate({
   //   product_name: 'a',
   //   product_description: 'asdfghjkl',
@@ -16,5 +16,6 @@ export const myProducts = async () => {
   //   product_usage: 'tyuikol',
   // });
   // console.log(addProduct);
+
   return getProducts;
 };

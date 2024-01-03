@@ -8,9 +8,9 @@ const product = {
   name: 'Basic Tee 6-Pack',
   price: '$192',
   breadcrumbs: [
-    { id: 1, name: 'Home', href: 'home' },
-    { id: 2, name: 'Products', href: 'home/products' },
-    { id: 2, name: 'Products list', href: 'home/products/list' },
+    { id: 1, name: 'Home', href: '/' },
+    { id: 2, name: 'Products', href: 'products' },
+    { id: 3, name: 'Products list', href: 'products/list' },
   ],
   images: [
     {

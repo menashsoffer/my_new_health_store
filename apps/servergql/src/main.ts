@@ -5,6 +5,7 @@ import connectToPG from './connectToDB';
 import { initTRPC } from '@trpc/server';
 import { ProductsTypes, db } from './db';
 import { z } from 'zod';
+// import { createProductsTable } from './sequelize';
 
 const t = initTRPC.create();
 

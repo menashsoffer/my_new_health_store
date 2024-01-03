@@ -10,8 +10,8 @@ import { ProductsTypes } from '../../../../../../../servergql/src/db';
 export interface ProductListProps {}
 
 const breadcrumbs = [
-  { id: 1, name: 'Home', href: 'home' },
-  { id: 2, name: 'Products', href: 'home/products' },
+  { id: 1, name: 'Home', href: '/' },
+  { id: 2, name: 'Products', href: 'products' },
 ];
 export function ProductList(props: ProductListProps) {
   const [products, setProducts] = useState<ProductsTypes[]>();
@@ -38,7 +38,9 @@ export function ProductList(props: ProductListProps) {
             className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
             onClick={() => navigate('productDetails')}
           >
-            {products?.map((product, i) => <ProductItem product={product} />)}
+            {products?.map((product, i) => (
+              <ProductItem product={product} key={i} />
+            ))}
           </div>
         </div>
       </div>
