@@ -1,14 +1,58 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from './connectToDB';
+import {
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+} from 'sequelize';
 
-const Products = sequelize.define(
+export type ProductCreate = {
+  product_name: string;
+  product_description: string;
+  price: number;
+  category: string;
+  image_src: string;
+  image_alt: string;
+  product_usage: string;
+  ingredients: string;
+};
+
+export type ProductRead = ProductCreate & {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+// export class ProductModel
+//   extends Model<
+//     Product & {
+//       id: string;
+//       createdAt: Date;
+//       updatedAt: Date;
+//     },
+//     Product
+//   >
+//   implements Product
+// {
+//   declare product_name: string;
+//   declare product_description: string;
+//   declare price: number;
+//   declare category: string;
+//   declare image_src: string;
+//   declare image_alt: string;
+//   declare product_usage: string;
+//   declare ingredients: string;
+// }
+
+export const ProductModel = sequelize.define<Model<ProductRead, ProductCreate>>(
   'products',
   {
-    // product_id: {
-    //   type: DataTypes.INTEGER,
-    //   primaryKey: true,
-    //   allowNull: false,
-    // },
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+    },
     product_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -41,12 +85,16 @@ const Products = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   },
   {
     schema: 'store',
     tableName: 'products',
+    // sequelize,
   },
 );
+
 // export const createProductsTable = async () => {
 //   try {
 //     await Products.sync({ force: true }).then(() => {
@@ -58,4 +106,4 @@ const Products = sequelize.define(
 //     return Promise.reject(error);
 //   }
 // };
-export default Products;
+// export default Products;

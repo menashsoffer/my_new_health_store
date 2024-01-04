@@ -2,9 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProductList.module.css';
 import ProductItem from './productItem/productItem';
 import ProductDetailsNav from '../productDetails/productDetailsNav/ProductDetailsNav';
-import { useEffect, useState } from 'react';
-import { myProducts } from '../../../../stores/productsStore';
-import { ProductsTypes } from '../../../../../../../servergql/src/db';
+import { useAtom } from 'jotai';
+import { productsListAtom } from '../../../../stores/productsStore';
 
 /* eslint-disable-next-line */
 export interface ProductListProps {}
@@ -14,16 +13,8 @@ const breadcrumbs = [
   { id: 2, name: 'Products', href: 'products' },
 ];
 export function ProductList(props: ProductListProps) {
-  const [products, setProducts] = useState<ProductsTypes[]>();
+  const [products] = useAtom(productsListAtom);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const x = async () => {
-      const newProducts = await myProducts();
-      setProducts(newProducts);
-    };
-    x();
-  }, []);
 
   return (
     <div className={styles['container']}>
