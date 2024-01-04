@@ -1,26 +1,24 @@
-import { useEffect, useState } from 'react';
 import styles from './Layout.module.css';
 import HeaderBar from './headerBar/HeaderBar';
 import Cart from '../cart/Cart';
-import { ProductsTypes } from 'apps/servergql/src/db';
-import { myProducts } from '../../stores/productsStore';
+import { productsListAtom } from '../../stores/productsStore';
 import { Outlet } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { trpc } from '../../../index';
 
 const Layout = () => {
-  const [products, setProducts] = useState<ProductsTypes[]>();
+  const [productsFromDb, setProducts] = useAtom(productsListAtom);
 
-  useEffect(() => {
-    const getProducts = async () => {
-      const newProducts = await myProducts();
-      setProducts(newProducts);
-    };
-    getProducts();
-  }, []);
+  const myProducts = async () => {
+    const products = await trpc.products.productsList.query();
+    productsFromDb.length === 0 ? setProducts(products) : null;
+  };
+  myProducts();
 
   return (
     <div className={styles['container']}>
       <HeaderBar />
-      <Cart products={products} quantity={3} setOpen={true} />
+      <Cart products={productsFromDb} quantity={3} setOpen={true} />
       <Outlet />
     </div>
   );

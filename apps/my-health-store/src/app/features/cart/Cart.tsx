@@ -5,11 +5,11 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useAtom } from 'jotai';
 import { cartAtom } from '../../stores/cartStore';
 import CartItems from './cartItems/CartItems';
-import { ProductsTypes } from '../../../../../servergql/src/db';
+import { Product } from '../../stores/productsStore';
 
 /* eslint-disable-next-line */
 export interface CartProps {
-  products?: ProductsTypes[];
+  products: Product[];
   quantity: number;
   setOpen: boolean;
 }
