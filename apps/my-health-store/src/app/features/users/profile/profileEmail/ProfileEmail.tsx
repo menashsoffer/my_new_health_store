@@ -12,7 +12,7 @@ export function ProfileEmail(props: ProfileEmailProps) {
         <div id="emailDiv" className="flex">
           <div className="  sm:w-full">
             <label
-              htmlFor="email"
+              htmlFor="emailLabel"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
               Email address

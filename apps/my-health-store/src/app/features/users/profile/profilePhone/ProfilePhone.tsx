@@ -14,7 +14,7 @@ export function ProfilePhone(props: ProfilePhoneProps) {
           // className=" sm:mx-auto sm:w-full sm:max-w-sm "
         >
           <label
-            htmlFor="phoneNumber"
+            htmlFor="phoneNumberLabel"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
             Phone number
