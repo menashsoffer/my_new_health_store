@@ -13,7 +13,7 @@ export function ProfilePassword(props: ProfilePasswordProps) {
           <div className=" sm:w-full sm:max-w-sm space-x-1">
             <div className="flex items-center justify-between">
               <label
-                htmlFor="password"
+                htmlFor="passwordLabel"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Password
@@ -34,7 +34,7 @@ export function ProfilePassword(props: ProfilePasswordProps) {
           <div className=" sm:w-full sm:max-w-sm space-x-1">
             <div className="flex items-center justify-between">
               <label
-                htmlFor="password"
+                htmlFor="passwordLabel"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Confirm password

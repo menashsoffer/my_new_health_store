@@ -11,7 +11,7 @@ export function SignInPhone(props: SignInPhoneProps) {
         // className=" sm:mx-auto sm:w-full sm:max-w-sm "
       >
         <label
-          htmlFor="phone"
+          htmlFor="phoneNumber"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
           Phone number

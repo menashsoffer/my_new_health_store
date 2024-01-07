@@ -12,7 +12,7 @@ export function ProfilePostalCode(props: ProfilePostalCodeProps) {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
           <div className="flex items-center justify-between">
             <label
-              htmlFor="postalCode"
+              htmlFor="postalCodeLabel"
               className="block text-sm font-medium leading-6 text-gray-900 "
             >
               Postal Code

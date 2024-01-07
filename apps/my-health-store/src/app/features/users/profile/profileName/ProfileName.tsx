@@ -16,7 +16,7 @@ export function ProfileName(props: ProfileNameProps) {
           <div className=" sm:w-full sm:max-w-sm space-x-1">
             <div className="flex items-center justify-between">
               <label
-                htmlFor="firstName"
+                htmlFor="firstNameLabel"
                 className="block text-sm font-medium leading-6 text-gray-900 "
               >
                 First name
@@ -37,7 +37,7 @@ export function ProfileName(props: ProfileNameProps) {
           <div className="sm:mx-auto sm:w-full sm:max-w-sm space-x-1">
             <div className="flex items-center justify-between">
               <label
-                htmlFor="lastName"
+                htmlFor="lastNameLabel"
                 className="block text-sm font-medium leading-6 text-gray-900 "
               >
                 Last name

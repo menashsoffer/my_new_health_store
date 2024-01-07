@@ -1,7 +1,6 @@
 import { z } from 'zod';
-import { db } from './db';
-import { publicProcedure, router } from './main';
-import { ProductCreate } from './sequelize';
+import { db } from './dal';
+import { publicProcedure, router } from './trpcRouter';
 
 const productsRouter = router({
   productsList: publicProcedure.query(async () => {

@@ -13,7 +13,7 @@
         "outputPath": "dist/apps/servergql",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/servergql/src/main.ts",
+        "main": "apps/servergql/src/trpcMain.ts",
         "tsConfig": "apps/servergql/tsconfig.app.json",
         "assets": ["apps/servergql/src/assets"],
         "generatePackageJson": true,

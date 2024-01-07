@@ -10,7 +10,7 @@ export function ProfileStreet(props: ProfileStreetProps) {
     <div className="sm:mx-auto sm:w-full sm:max-w-sm space-x-1">
       <div className="flex items-center justify-between">
         <label
-          htmlFor="street"
+          htmlFor="streetLabel"
           className="block text-sm font-medium leading-6 text-gray-900 "
         >
           Street
