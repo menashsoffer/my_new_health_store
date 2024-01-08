@@ -1,4 +1,5 @@
-import { ProductCreate, ProductModel } from './sequelize';
+import { ProductCreate } from '../../library/index';
+import { ProductModel } from './sequelize';
 
 const getAllProducts = async () => {
   try {

@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@my-health-store/types": ["apps/src/index.ts"],
+      "@mylib/my_types_lib": ["my_new_health_store/apps/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
