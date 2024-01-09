@@ -20,6 +20,8 @@ export function ProfilePostalCode(props: ProfilePostalCodeProps) {
             <div className="text-sm">
               <a
                 href="https://israelpost.co.il/%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99%D7%9D/%D7%90%D7%99%D7%AA%D7%95%D7%A8-%D7%9E%D7%99%D7%A7%D7%95%D7%93/"
+                target="_blank"
+                rel="noreferrer"
                 className="font-semibold text-indigo-600 hover:text-indigo-500"
               >
                 Find your zip code here...

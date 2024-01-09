@@ -2,10 +2,8 @@ import styles from './ProfileName.module.css';
 
 /* eslint-disable-next-line */
 export interface ProfileNameProps {
-  name: {
-    firstName: string;
-    lastName: string;
-  };
+  firstName: string;
+  lastName: string;
 }
 
 export function ProfileName(props: ProfileNameProps) {
@@ -30,7 +28,7 @@ export function ProfileName(props: ProfileNameProps) {
                 autoComplete="firstName"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                defaultValue={props.name.firstName}
+                defaultValue={props.firstName}
               />
             </div>
           </div>
@@ -51,7 +49,7 @@ export function ProfileName(props: ProfileNameProps) {
                 autoComplete="lastName"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                defaultValue={props.name.lastName}
+                defaultValue={props.lastName}
               />
             </div>
           </div>

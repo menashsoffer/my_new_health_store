@@ -1,6 +1,11 @@
+import { useAtom } from 'jotai';
 import styles from './HomePage.module.css';
+import { newUserAtom } from '../../stores/userStore';
 
 export function HomePage() {
+  const [user] = useAtom(newUserAtom);
+  console.log(user);
+
   return (
     <div className={styles['container']}>
       <div className="flex flex-col items-center px-4 py-8">

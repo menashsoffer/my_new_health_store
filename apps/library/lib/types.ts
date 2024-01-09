@@ -19,6 +19,6 @@ export type ProductRead = {
   image_alt: string;
   product_usage: string;
   ingredients: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 };

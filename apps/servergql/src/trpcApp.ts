@@ -5,7 +5,6 @@ import { db } from './dal';
 export const appRouter = router({
   productsList: publicProcedure.query(async () => {
     const products = await db.products.findMany();
-    console.log(products);
     return products;
   }),
   addProduct: publicProcedure

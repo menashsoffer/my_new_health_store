@@ -2,14 +2,18 @@ import styles from './Avatar.module.css';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { avatarAtom } from '../../../stores/avatarStore';
+import { useNavigate } from 'react-router-dom';
+import { newUserAtom } from '../../../stores/userStore';
 
 /* eslint-disable-next-line */
 export interface AvatarProps {}
 
 export function Avatar(props: AvatarProps) {
   const [, setShow] = useAtom(avatarAtom);
+  const setUser = useSetAtom(newUserAtom);
+  const navigate = useNavigate();
 
   return (
     <div className={styles['container']}>
@@ -37,34 +41,37 @@ export function Avatar(props: AvatarProps) {
           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="/profile"
+                <div
+                  onClick={() => navigate(`/profile`)}
+                  // href="/profile"
                   className={classNames(
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
                   )}
                 >
                   Your Profile
-                </a>
+                </div>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="/"
+                <div
+                  onClick={() => navigate('/home')}
                   className={classNames(
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
                   )}
                 >
                   Orders
-                </a>
+                </div>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <a
-                  onClick={() => setShow(false)}
+                  onClick={() => {
+                    setShow(false);
+                  }}
                   href="/"
                   className={classNames(
                     active ? 'bg-gray-100' : '',

@@ -5,11 +5,9 @@ import ProfileStreet from './profileStreet/ProfileStreet';
 
 /* eslint-disable-next-line */
 export interface ProfileAddressProps {
-  address: {
-    city: string;
-    street: string;
-    postalCode: string;
-  };
+  city: string;
+  street: string;
+  postalCode: string;
 }
 
 export function ProfileAddress(props: ProfileAddressProps) {
@@ -19,11 +17,11 @@ export function ProfileAddress(props: ProfileAddressProps) {
         address
       </p>
       <div className="mt-2 flex space-x-1" id="addressDiv">
-        <ProfileCity city={props.address.city} />
-        <ProfileStreet street={props.address.street} />
+        <ProfileCity city={props.city} />
+        <ProfileStreet street={props.street} />
       </div>
       <div className="mt-2 " id="addressDiv">
-        <ProfilePostalCode postalCode={props.address.postalCode} />
+        <ProfilePostalCode postalCode={props.postalCode} />
       </div>
     </div>
   );

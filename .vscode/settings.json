@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["postgraphile", "trpc"]
+  "cSpell.words": [
+    "firstname",
+    "lastname",
+    "phonenumber",
+    "postalcode",
+    "postgraphile",
+    "trpc"
+  ]
 }

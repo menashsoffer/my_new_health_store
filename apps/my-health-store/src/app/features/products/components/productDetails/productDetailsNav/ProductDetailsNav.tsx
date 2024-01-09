@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './ProductDetailsNav.module.css';
 
 /* eslint-disable-next-line */
@@ -10,6 +11,7 @@ export interface ProductDetailsNavProps {
 }
 
 export function ProductDetailsNav(props: ProductDetailsNavProps) {
+  const navigate = useNavigate();
   return (
     <div className={styles['container']}>
       <nav aria-label="Breadcrumb">
@@ -17,12 +19,12 @@ export function ProductDetailsNav(props: ProductDetailsNavProps) {
           {props.breadcrumbs.map((breadcrumb) => (
             <li key={breadcrumb.id}>
               <div className="flex items-center">
-                <a
-                  href={breadcrumb.href}
+                <div
+                  onClick={() => navigate(breadcrumb.href)}
                   className="mr-2 text-sm font-medium text-gray-900"
                 >
                   {breadcrumb.name}
-                </a>
+                </div>
                 <svg
                   width={16}
                   height={20}

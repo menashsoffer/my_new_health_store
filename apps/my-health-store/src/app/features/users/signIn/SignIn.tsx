@@ -6,14 +6,14 @@ import SignInName from './signInForm/signInName/signInName';
 import SignInPassword from './signInForm/signInPassword/signInPassword';
 import SignInPhone from './signInForm/signInPhone/signInPhone';
 // import { useAtom } from 'jotai';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface SignInProps {}
 
 export function SignIn(props: SignInProps) {
   // const [newUser, setNewUser] = useAtom(newUserAtom);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleFirstName = (firstName: string) => {
     console.log(firstName);
@@ -40,7 +40,11 @@ export function SignIn(props: SignInProps) {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-screen-sm ">
-          <form className="space-y-6" action="#" method="POST">
+          <form
+            className="space-y-6"
+            onSubmit={(event) => event.preventDefault()}
+            method="POST"
+          >
             <SignInName
               onFirstNameChange={handleFirstName}
               onLastNameChange={handleLastName}
@@ -62,12 +66,12 @@ export function SignIn(props: SignInProps) {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            <a
-              href="/"
+            <div
+              onClick={() => navigate('/')}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Go back to store
-            </a>
+            </div>
           </p>
         </div>
       </div>
