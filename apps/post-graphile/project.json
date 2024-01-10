@@ -1,0 +1,67 @@
+{
+  "name": "post-graphile",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/post-graphile/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/post-graphile",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/post-graphile/src/main.ts",
+        "tsConfig": "apps/post-graphile/tsconfig.app.json",
+        "assets": ["apps/post-graphile/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "post-graphile:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "post-graphile:build:development"
+        },
+        "production": {
+          "buildTarget": "post-graphile:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/post-graphile/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

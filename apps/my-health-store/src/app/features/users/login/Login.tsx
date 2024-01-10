@@ -1,11 +1,61 @@
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import styles from './Login.module.css';
 import { useNavigate } from 'react-router-dom';
-import { avatarAtom } from '../../../stores/avatarStore';
+import { useLazyQuery } from '@apollo/client';
+import { GET_USER_BY_EMAIL } from '../../../../graphql/query';
+import { useEffect, useState } from 'react';
+import { userAtom } from '../../../stores/userStore';
 
 export function Login() {
   const navigate = useNavigate();
-  const [, setShow] = useAtom(avatarAtom);
+  const setUser = useSetAtom(userAtom);
+  const [getUser, { data }] = useLazyQuery(GET_USER_BY_EMAIL);
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
+
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
+  const checkUser = () => {
+    getUser({ variables: { email: form.email } });
+  };
+
+  useEffect(() => {
+    if (data) click();
+  }, [data]);
+
+  const click = () => {
+    if (data.userByEmail.password === form.password) {
+      const {
+        id,
+        firstname,
+        lastname,
+        email,
+        password,
+        city,
+        street,
+        postalcode,
+        phonenumber,
+      } = data.userByEmail;
+      setUser({
+        id,
+        firstname,
+        lastname,
+        email,
+        password,
+        city,
+        street,
+        postalcode,
+        phonenumber,
+      });
+      navigate('/home');
+    } else {
+      console.log('not valid password');
+    }
+  };
 
   return (
     <div className={styles['container']}>
@@ -22,7 +72,7 @@ export function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <div className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -38,6 +88,7 @@ export function Login() {
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={changeHandler}
                 />
               </div>
             </div>
@@ -51,12 +102,12 @@ export function Login() {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="/"
+                  <div
+                    onClick={() => navigate('/')}
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot password?
-                  </a>
+                  </div>
                 </div>
               </div>
               <div className="mt-2">
@@ -67,37 +118,35 @@ export function Login() {
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={changeHandler}
                 />
               </div>
             </div>
+            {form.email !== '' && form.password !== '' ? (
+              <div>
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => checkUser()}
+                >
+                  Sign in
+                </button>
+              </div>
+            ) : null}
+          </div>
 
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => {
-                  setShow(true);
-                  navigate('/');
-                }}
-              >
-                Sign in
-              </button>
-            </div>
-          </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <div className="mt-10 text-center text-sm text-gray-500">
             Unregistered?{' '}
-            <a
-              href="signIn"
+            <div
+              onClick={() => navigate('/signIn')}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Register here...
-            </a>
-          </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
 export default Login;

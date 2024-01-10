@@ -1,20 +1,7 @@
 import { atom } from 'jotai';
+import { ProductRead } from '../../../../library/index';
 
-export type Product = {
-  id?: string;
-  product_name: string;
-  product_description: string;
-  price: number;
-  category: string;
-  image_src: string;
-  image_alt: string;
-  product_usage: string;
-  ingredients: string;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export const productsListAtom = atom<Product[]>([]);
+export const productsListAtom = atom<ProductRead[]>([]);
 
 // const myProducts = async () => {
 //   // const test = await trpc.greeting.query({ name: '' });

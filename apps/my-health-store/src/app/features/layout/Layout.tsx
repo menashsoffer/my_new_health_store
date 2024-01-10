@@ -4,13 +4,17 @@ import Cart from '../cart/Cart';
 import { productsListAtom } from '../../stores/productsStore';
 import { Outlet } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { trpc } from '../../../index';
+import { trpc } from '../../../trpc/index';
+import { ProductRead } from '../../../../../library/index';
+// import { useQuery } from '@apollo/client';
+// import { GET_USERS } from '../../../graphql/query';
 
 const Layout = () => {
   const [productsFromDb, setProducts] = useAtom(productsListAtom);
 
   const myProducts = async () => {
-    const products = await trpc.products.productsList.query();
+    const products: ProductRead[] = await trpc.productsList.query();
+    // console.log(products);
     productsFromDb.length === 0 ? setProducts(products) : null;
   };
   myProducts();

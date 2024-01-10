@@ -1,13 +1,15 @@
-import { ProductsTypes } from '../../../../../../servergql/src/db';
+import { useNavigate } from 'react-router-dom';
 import styles from './CartItems.module.css';
+import { ProductRead } from '../../../../../../library/index';
 
 /* eslint-disable-next-line */
 export interface CartItemsProps {
-  product: ProductsTypes;
+  product: ProductRead;
   quantity: number;
 }
 
 export function CartItems(props: CartItemsProps) {
+  const navigate = useNavigate();
   return (
     <div className={styles['container']}>
       <li key={props.product.id} className="flex py-6">
@@ -23,16 +25,16 @@ export function CartItems(props: CartItemsProps) {
           <div>
             <div className="flex justify-between text-base font-medium text-gray-900">
               <h3>
-                <a href="products/list/productDetails">
+                <div onClick={() => navigate('products/list/productDetails')}>
                   {props.product.product_name}
-                </a>
+                </div>
               </h3>
               <p className="ml-4">{props.product.price}</p>
             </div>
             {/* <p className="mt-1 text-sm text-gray-500">{props.product.color}</p> */}
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <p className="text-gray-500">Qty {props.quantity}</p>
+            <div className="text-gray-500">Qty {props.quantity}</div>
 
             <div className="flex">
               <button

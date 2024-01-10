@@ -3,15 +3,12 @@ import Avatar from '../../avatar/Avatar';
 import styles from './HeaderButtons.module.css';
 import { useNavigate } from 'react-router-dom';
 import { cartAtom } from '../../../../stores/cartStore';
-import { avatarAtom } from '../../../../stores/avatarStore';
+import { userAtom } from '../../../../stores/userStore';
 
-/* eslint-disable-next-line */
-export interface HeaderButtonsProps {}
-
-export function HeaderButtons(props: HeaderButtonsProps) {
+export function HeaderButtons() {
   const navigate = useNavigate();
   const [open, setOpen] = useAtom(cartAtom);
-  const [show] = useAtom(avatarAtom);
+  const [user] = useAtom(userAtom);
 
   return (
     <div className={styles['container']}>
@@ -55,7 +52,7 @@ export function HeaderButtons(props: HeaderButtonsProps) {
             />
           </svg>
         </button>
-        {show === true ? (
+        {user.email.length > 3 ? (
           <Avatar />
         ) : (
           <button

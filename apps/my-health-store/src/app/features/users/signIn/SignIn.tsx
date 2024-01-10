@@ -1,29 +1,23 @@
-// import { newUserAtom } from 'src/app/stores/UserStore';
 import styles from './SignIn.module.css';
 import Address from './signInForm/signInAddress/Address';
 import SignInEmail from './signInForm/signInEmail/signInEmail';
 import SignInName from './signInForm/signInName/signInName';
 import SignInPassword from './signInForm/signInPassword/signInPassword';
 import SignInPhone from './signInForm/signInPhone/signInPhone';
-// import { useAtom } from 'jotai';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import SignInButton from './signInForm/signInButton/SignInButton';
+import { useAtomValue } from 'jotai';
+import { createUserAtom } from '../../../stores/userStore';
+import { useEffect } from 'react';
 
-/* eslint-disable-next-line */
-export interface SignInProps {}
+export function SignIn() {
+  const navigate = useNavigate();
+  const createUser = useAtomValue(createUserAtom);
 
-export function SignIn(props: SignInProps) {
-  // const [newUser, setNewUser] = useAtom(newUserAtom);
-  // const navigate = useNavigate();
-
-  const handleFirstName = (firstName: string) => {
-    console.log(firstName);
-
-    return firstName;
-  };
-
-  const handleLastName = (lastName: string) => {
-    return lastName;
-  };
+  const hasEmpty = Object.values(createUser).includes('');
+  useEffect(() => {
+    console.log(createUser);
+  }, [createUser]);
 
   return (
     <div className={styles['container']}>
@@ -40,35 +34,27 @@ export function SignIn(props: SignInProps) {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-screen-sm ">
-          <form className="space-y-6" action="#" method="POST">
-            <SignInName
-              onFirstNameChange={handleFirstName}
-              onLastNameChange={handleLastName}
-            />
+          <form
+            className="space-y-6"
+            onSubmit={(event) => event.preventDefault()}
+            method="POST"
+          >
+            <SignInName />
             <SignInPhone />
             <SignInEmail />
             <SignInPassword />
             <Address />
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                // onClick={() => }
-              >
-                Sign in
-              </button>
-            </div>
+            {hasEmpty ? null : <SignInButton />}
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
-            <a
-              href="/"
+          <div className="mt-10 text-center text-sm text-gray-500">
+            <div
+              onClick={() => navigate('/')}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Go back to store
-            </a>
-          </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,49 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from './connectToDB';
-import {
-  Model,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from 'sequelize';
-
-export type ProductCreate = {
-  product_name: string;
-  product_description: string;
-  price: number;
-  category: string;
-  image_src: string;
-  image_alt: string;
-  product_usage: string;
-  ingredients: string;
-};
-
-export type ProductRead = ProductCreate & {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-// export class ProductModel
-//   extends Model<
-//     Product & {
-//       id: string;
-//       createdAt: Date;
-//       updatedAt: Date;
-//     },
-//     Product
-//   >
-//   implements Product
-// {
-//   declare product_name: string;
-//   declare product_description: string;
-//   declare price: number;
-//   declare category: string;
-//   declare image_src: string;
-//   declare image_alt: string;
-//   declare product_usage: string;
-//   declare ingredients: string;
-// }
+import { Model } from 'sequelize';
+import { ProductCreate, ProductRead } from '../../library/index';
 
 export const ProductModel = sequelize.define<Model<ProductRead, ProductCreate>>(
   'products',

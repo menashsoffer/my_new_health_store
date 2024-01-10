@@ -24,7 +24,8 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "my-health-store:build"
+        "buildTarget": "my-health-store:build",
+        "proxyConfig": "apps/my-health-store/proxy.conf.json"
       },
       "configurations": {
         "development": {

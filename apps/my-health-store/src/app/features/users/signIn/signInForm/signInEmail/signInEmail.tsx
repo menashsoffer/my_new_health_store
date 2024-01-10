@@ -1,9 +1,19 @@
+import { useAtom } from 'jotai';
 import styles from './signInEmail.module.css';
+import { createUserAtom } from '../../../../../stores/userStore';
+import { useEffect } from 'react';
 
-/* eslint-disable-next-line */
-export interface SignInEmailProps {}
+const SignInEmail = () => {
+  const [createUser, setUser] = useAtom(createUserAtom);
 
-export function SignInEmail(props: SignInEmailProps) {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({
+      ...createUser,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  useEffect(() => {}, [createUser]);
   return (
     <div className={styles['container']}>
       <div id="emailDiv" className="flex">
@@ -22,12 +32,13 @@ export function SignInEmail(props: SignInEmailProps) {
               autoComplete="email"
               required
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              onChange={changeHandler}
             />
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default SignInEmail;

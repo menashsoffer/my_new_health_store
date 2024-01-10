@@ -10,10 +10,10 @@ const server = createHTTPServer({
 
 server.listen(3000);
 server.server.on('listening', () => {
-  console.log('server is up and running');
+  console.log('\x1b[43m', 'server is up and running');
   connectToPG()
     .then(() => {
-      console.log('connected to DB');
+      console.log('\x1b[42m', 'connected to DB');
     })
     .catch((error) => console.error('not connecting to DB', error));
 });

@@ -10,22 +10,6 @@ import ProductDetails from '../features/products/components/productDetails/Produ
 import Layout from '../features/layout/Layout';
 import Redirect from '../features/layout/redirect/Redirect';
 
-const myUser = {
-  id: '1',
-  name: {
-    firstName: 'John',
-    lastName: 'Doe',
-  },
-  email: 'john.doe@example.com',
-  password: 'password123',
-  address: {
-    city: 'New York',
-    street: '123 Main St',
-    postalCode: '10001',
-  },
-  phone: 2125551234,
-};
-
 export function RouterDOM() {
   return (
     <Routes>
@@ -40,7 +24,7 @@ export function RouterDOM() {
           path="products/list/productDetails"
           element={<ProductDetails />}
         />
-        <Route path="profile" element={<Profile user={myUser} />} />
+        <Route path="profile" element={<Profile />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
