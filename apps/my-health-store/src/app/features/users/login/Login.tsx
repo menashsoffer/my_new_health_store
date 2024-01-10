@@ -1,16 +1,14 @@
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import styles from './Login.module.css';
 import { useNavigate } from 'react-router-dom';
-import { avatarAtom } from '../../../stores/avatarStore';
 import { useLazyQuery } from '@apollo/client';
 import { GET_USER_BY_EMAIL } from '../../../../graphql/query';
 import { useEffect, useState } from 'react';
-import { newUserAtom } from '../../../stores/userStore';
+import { userAtom } from '../../../stores/userStore';
 
 export function Login() {
   const navigate = useNavigate();
-  const [, setShow] = useAtom(avatarAtom);
-  const setUser = useSetAtom(newUserAtom);
+  const setUser = useSetAtom(userAtom);
   const [getUser, { data }] = useLazyQuery(GET_USER_BY_EMAIL);
   const [form, setForm] = useState({
     email: '',
@@ -26,7 +24,6 @@ export function Login() {
   };
 
   useEffect(() => {
-    console.log(data);
     if (data) click();
   }, [data]);
 
@@ -54,7 +51,6 @@ export function Login() {
         postalcode,
         phonenumber,
       });
-      setShow(true);
       navigate('/home');
     } else {
       console.log('not valid password');
@@ -139,7 +135,7 @@ export function Login() {
             ) : null}
           </div>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <div className="mt-10 text-center text-sm text-gray-500">
             Unregistered?{' '}
             <div
               onClick={() => navigate('/signIn')}
@@ -147,7 +143,7 @@ export function Login() {
             >
               Register here...
             </div>
-          </p>
+          </div>
         </div>
       </div>
     </div>

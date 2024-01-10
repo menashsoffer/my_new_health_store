@@ -34,7 +34,7 @@ export function CartItems(props: CartItemsProps) {
             {/* <p className="mt-1 text-sm text-gray-500">{props.product.color}</p> */}
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <p className="text-gray-500">Qty {props.quantity}</p>
+            <div className="text-gray-500">Qty {props.quantity}</div>
 
             <div className="flex">
               <button

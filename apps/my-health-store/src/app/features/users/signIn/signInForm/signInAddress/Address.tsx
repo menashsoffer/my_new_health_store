@@ -1,12 +1,9 @@
 import styles from './Address.module.css';
 import SignInCity from './signInCity/SignInCity';
 import SignInPostalCode from './signInPostalCode/SignInPostalCode';
-import { SignInStreet } from './signInStreet/SignInStreet';
+import SignInStreet from './signInStreet/SignInStreet';
 
-/* eslint-disable-next-line */
-export interface AddressProps {}
-
-export function Address(props: AddressProps) {
+const Address = () => {
   return (
     <div className={styles['container']}>
       <p className=" mt-10 text-center text-xl font-bold leading-9 tracking-tight text-gray-900">
@@ -21,6 +18,6 @@ export function Address(props: AddressProps) {
       </div>
     </div>
   );
-}
+};
 
 export default Address;

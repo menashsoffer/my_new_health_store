@@ -1,12 +1,20 @@
+import { useAtom } from 'jotai';
 import styles from './ProfileName.module.css';
+import { updateUserAtom } from '../../../../stores/userStore';
+import { useEffect } from 'react';
 
-/* eslint-disable-next-line */
-export interface ProfileNameProps {
-  firstName: string;
-  lastName: string;
-}
+const ProfileName = () => {
+  const [updateUser, setUser] = useAtom(updateUserAtom);
 
-export function ProfileName(props: ProfileNameProps) {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({
+      ...updateUser,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  useEffect(() => {}, [updateUser]);
+
   return (
     <div className={styles['container']}>
       <div className={styles['container']}>
@@ -14,7 +22,7 @@ export function ProfileName(props: ProfileNameProps) {
           <div className=" sm:w-full sm:max-w-sm space-x-1">
             <div className="flex items-center justify-between">
               <label
-                htmlFor="firstNameLabel"
+                htmlFor="firstname"
                 className="block text-sm font-medium leading-6 text-gray-900 "
               >
                 First name
@@ -22,20 +30,20 @@ export function ProfileName(props: ProfileNameProps) {
             </div>
             <div className="mt-2">
               <input
-                id="firstName"
-                name="firstName"
+                id="firstname"
+                name="firstname"
                 type="text"
-                autoComplete="firstName"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                defaultValue={props.firstName}
+                defaultValue={updateUser.firstname}
+                onChange={changeHandler}
               />
             </div>
           </div>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm space-x-1">
             <div className="flex items-center justify-between">
               <label
-                htmlFor="lastNameLabel"
+                htmlFor="lastname"
                 className="block text-sm font-medium leading-6 text-gray-900 "
               >
                 Last name
@@ -43,13 +51,13 @@ export function ProfileName(props: ProfileNameProps) {
             </div>
             <div className="mt-2">
               <input
-                id="lastName"
-                name="lastName"
+                id="lastname"
+                name="lastname"
                 type="text"
-                autoComplete="lastName"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                defaultValue={props.lastName}
+                defaultValue={updateUser.lastname}
+                onChange={changeHandler}
               />
             </div>
           </div>
@@ -57,6 +65,6 @@ export function ProfileName(props: ProfileNameProps) {
       </div>
     </div>
   );
-}
+};
 
 export default ProfileName;

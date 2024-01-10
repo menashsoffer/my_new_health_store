@@ -2,17 +2,9 @@ import styles from './Avatar.module.css';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
-import { useAtom, useSetAtom } from 'jotai';
-import { avatarAtom } from '../../../stores/avatarStore';
 import { useNavigate } from 'react-router-dom';
-import { newUserAtom } from '../../../stores/userStore';
 
-/* eslint-disable-next-line */
-export interface AvatarProps {}
-
-export function Avatar(props: AvatarProps) {
-  const [, setShow] = useAtom(avatarAtom);
-  const setUser = useSetAtom(newUserAtom);
+export function Avatar() {
   const navigate = useNavigate();
 
   return (
@@ -43,7 +35,6 @@ export function Avatar(props: AvatarProps) {
               {({ active }) => (
                 <div
                   onClick={() => navigate(`/profile`)}
-                  // href="/profile"
                   className={classNames(
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
@@ -69,9 +60,6 @@ export function Avatar(props: AvatarProps) {
             <Menu.Item>
               {({ active }) => (
                 <a
-                  onClick={() => {
-                    setShow(false);
-                  }}
                   href="/"
                   className={classNames(
                     active ? 'bg-gray-100' : '',

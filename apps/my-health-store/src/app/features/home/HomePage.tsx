@@ -1,11 +1,9 @@
 import { useAtom } from 'jotai';
 import styles from './HomePage.module.css';
-import { newUserAtom } from '../../stores/userStore';
+import { userAtom } from '../../stores/userStore';
 
 export function HomePage() {
-  const [user] = useAtom(newUserAtom);
-  console.log(user);
-
+  const [user] = useAtom(userAtom);
   return (
     <div className={styles['container']}>
       <div className="flex flex-col items-center px-4 py-8">
@@ -13,7 +11,9 @@ export function HomePage() {
 
         <main>
           <section className="text-center max-w-lg mb-8 ">
-            <h2 className="text-3xl font-bold mb-4">Welcome Message</h2>
+            <h2 className="text-3xl font-bold mb-4">
+              Welcome {user.firstname}
+            </h2>
             <p className="text-gray-700">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos,
               quae!

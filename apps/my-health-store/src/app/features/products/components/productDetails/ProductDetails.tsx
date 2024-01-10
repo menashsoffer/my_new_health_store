@@ -4,7 +4,7 @@ import ProductDetailsNav from './productDetailsNav/ProductDetailsNav';
 /* eslint-disable-next-line */
 export interface ProductDetailsProps {}
 
-const product = {
+export const product = {
   name: 'Basic Tee 6-Pack',
   price: '$192',
   breadcrumbs: [
