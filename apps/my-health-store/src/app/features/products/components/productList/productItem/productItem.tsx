@@ -1,23 +1,21 @@
 import styles from './productItem.module.css';
+import { ProductRead } from '../../../../../../../../library/index';
+import { useNavigate } from 'react-router-dom';
 
 /* eslint-disable-next-line */
 export interface ProductItemProps {
-  product: {
-    id?: string;
-    product_name: string;
-    image_src: string;
-    image_alt: string;
-    price: number;
-    category: string;
-    product_description: string;
-    ingredients: string;
-    product_usage: string;
-  };
+  product: ProductRead;
 }
 
 export function ProductItem(props: ProductItemProps, key: number) {
+  const navigate = useNavigate();
+
   return (
-    <div className={styles['container']} key={props.product.id}>
+    <div
+      className={styles['container']}
+      key={props.product.id}
+      onClick={() => navigate(`/products/product/${props.product.id}`)}
+    >
       {' '}
       <div key={key} className="group relative">
         <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">

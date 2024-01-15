@@ -49,12 +49,12 @@ export function Profile() {
           </form>
 
           <div className="mt-10 text-center text-sm text-gray-500">
-            <div
+            <button
               onClick={() => navigate('/home')}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Go back to store
-            </div>
+            </button>
           </div>
         </div>
       </div>

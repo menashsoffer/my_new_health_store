@@ -2,7 +2,7 @@ export type ProductCreate = {
   product_name: string;
   product_description: string;
   price: number;
-  category: string;
+  categoryId: number;
   image_src: string;
   image_alt: string;
   product_usage: string;
@@ -10,15 +10,15 @@ export type ProductCreate = {
 };
 
 export type ProductRead = {
-  id: string;
+  id?: string;
   product_name: string;
   product_description: string;
   price: number;
-  category: string;
+  categoryId: number;
   image_src: string;
   image_alt: string;
   product_usage: string;
   ingredients: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 };

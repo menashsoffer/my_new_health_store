@@ -1,5 +1,5 @@
-import { useSetAtom } from 'jotai';
 import styles from './Login.module.css';
+import { useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { GET_USER_BY_EMAIL } from '../../../../graphql/query';

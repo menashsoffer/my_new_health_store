@@ -1,23 +1,22 @@
 import { useNavigate } from 'react-router-dom';
+import { CategoryRead } from '../../../../../../../library/index';
 
 /* eslint-disable-next-line */
 export interface CategoryProps {
-  callout: {
-    id: number;
-    name: string;
-    description: string;
-    imageSrc: string;
-  };
+  callout: CategoryRead;
 }
 
-export function Category(props: CategoryProps, key: number) {
+const Category = (props: CategoryProps, key: number) => {
   const navigate = useNavigate();
   return (
-    <div className="group relative" onClick={() => navigate('list')}>
+    <div
+      className="group relative"
+      onClick={() => navigate(`/products/category/${props.callout.id}`)}
+    >
       <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
         <img
           key={key}
-          src={props.callout.imageSrc}
+          src={props.callout.image_src}
           alt={props.callout.name}
           className="h-full w-full object-cover object-center"
         />
@@ -31,6 +30,6 @@ export function Category(props: CategoryProps, key: number) {
       </p>
     </div>
   );
-}
+};
 
 export default Category;

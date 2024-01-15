@@ -10,13 +10,14 @@ export function HomePage() {
         <header className="flex items-center justify-between w-full mb-8 bg-red-500"></header>
 
         <main>
-          <section className="text-center max-w-lg mb-8 ">
+          <section className="text-center mb-28 ">
             <h2 className="text-3xl font-bold mb-4">
               Welcome {user.firstname}
             </h2>
             <p className="text-gray-700">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos,
-              quae!
+              "Welcome to our health and wellness shop! We're thrilled you're
+              here and hope you find exactly what you need for your health
+              journey."
             </p>
           </section>
           <div className="grid grid-flow-col grid-rows-2 grid-cols-3 gap-8 justify-center">

@@ -15,9 +15,8 @@ export function SignIn() {
   const createUser = useAtomValue(createUserAtom);
 
   const hasEmpty = Object.values(createUser).includes('');
-  useEffect(() => {
-    console.log(createUser);
-  }, [createUser]);
+
+  useEffect(() => {}, [createUser]);
 
   return (
     <div className={styles['container']}>
