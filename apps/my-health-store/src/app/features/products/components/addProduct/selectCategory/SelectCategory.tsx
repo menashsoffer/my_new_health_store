@@ -3,10 +3,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { useAtom, useAtomValue } from 'jotai';
-import {
-  categoriesListAtom,
-  productForm,
-} from '../../../../../stores/productsStore';
+import { categoriesListAtom, productForm } from '../../../atom/productsStore';
 import { CategoryRead } from '../../../../../../../../library/index';
 
 function classNames(...classes: string[]) {

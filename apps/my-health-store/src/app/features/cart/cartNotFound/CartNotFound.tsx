@@ -3,7 +3,7 @@ import { Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { useAtom } from 'jotai';
-import { cartNotFoundAtom } from '../../../stores/cartStore';
+import { cartNotFoundAtom } from '../atom/cartStore';
 import { useNavigate } from 'react-router-dom';
 
 const CartNotFound = () => {

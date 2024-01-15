@@ -1,9 +1,9 @@
 import styles from './ProductDetails.module.css';
 import { useAtom, useAtomValue } from 'jotai';
 import ProductDetailsNav from './productDetailsNav/ProductDetailsNav';
-import { productsListAtom } from '../../../../stores/productsStore';
+import { productsListAtom } from '../../atom/productsStore';
 import { useParams } from 'react-router-dom';
-import { cartAtom } from '../../../../stores/cartStore';
+import { cartAtom } from '../../../cart/atom/cartStore';
 import { addToCart } from './fn/addToCartFn';
 
 const ProductDetails = () => {
@@ -13,8 +13,7 @@ const ProductDetails = () => {
 
   const breadcrumbs = [
     { id: 1, name: 'Home', href: '/' },
-    { id: 2, name: 'Products', href: 'products' },
-    { id: 3, name: 'Products list', href: 'products/list' },
+    { id: 2, name: 'Products', href: '/products' },
   ];
 
   const currentProduct = products.find(

@@ -3,7 +3,7 @@ import styles from './Cart.module.css';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useAtom, useAtomValue } from 'jotai';
-import { cartAtom, openCartAtom } from '../../stores/cartStore';
+import { cartAtom, openCartAtom } from './atom/cartStore';
 import CartItems from './cartItems/CartItems';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const Cart = () => {
   useEffect(() => {
     let a = 0;
     cart.map((i) => {
-      a += i[0].price * i[1];
+      a += i.product.price * i.quantity;
     });
     setAmount(a);
   }, [cart]);

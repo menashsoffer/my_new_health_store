@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import styles from './ProfileName.module.css';
-import { updateUserAtom } from '../../../../stores/userStore';
+import { updateUserAtom } from '../../atom/userStore';
 import { useEffect } from 'react';
 
 const ProfileName = () => {

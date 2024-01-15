@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProductCreate } from '../../../../../../../../library/index';
 import styles from './CreateButton.module.css';
 import { useAtomValue } from 'jotai';
-import { productForm } from '../../../../../stores/productsStore';
+import { productForm } from '../../../atom/productsStore';
 import { trpc } from '../../../../../../trpc/index';
 
 const CreateButton = () => {

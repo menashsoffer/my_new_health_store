@@ -3,11 +3,11 @@ import { useAtomValue } from 'jotai';
 import { useParams } from 'react-router-dom';
 import ProductItem from './productItem/productItem';
 import ProductDetailsNav from '../productDetails/productDetailsNav/ProductDetailsNav';
-import { productsListAtom } from '../../../../stores/productsStore';
+import { productsListAtom } from '../../atom/productsStore';
 
 const breadcrumbs = [
   { id: 1, name: 'Home', href: '/' },
-  { id: 2, name: 'Products', href: 'products' },
+  { id: 2, name: 'Products', href: '/products' },
 ];
 const ProductList = () => {
   const products = useAtomValue(productsListAtom);

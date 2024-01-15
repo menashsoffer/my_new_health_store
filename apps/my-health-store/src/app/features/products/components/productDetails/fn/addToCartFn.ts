@@ -6,14 +6,14 @@ export const addToCart = (
 ): CartType[] => {
   const updatedCart = [...cart];
   const index = updatedCart.findIndex(
-    (item) => item[0].id === currentProduct.id,
+    (item) => item.product.id === currentProduct.id,
   );
   if (index === -1) {
-    updatedCart.push([currentProduct, 1]);
+    updatedCart.push({ product: currentProduct, quantity: 1 });
     return updatedCart;
   } else {
     const updatedItem = updatedCart[index];
-    updatedItem[1]++;
+    updatedItem.quantity++;
     return [
       ...updatedCart.slice(0, index),
       updatedItem,

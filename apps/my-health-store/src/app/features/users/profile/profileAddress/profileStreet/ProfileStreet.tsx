@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { updateUserAtom } from '../../../../../stores/userStore';
+import { updateUserAtom } from '../../../atom/userStore';
 import { useAtom } from 'jotai';
 
 export function ProfileStreet() {

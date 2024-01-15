@@ -2,9 +2,9 @@ import { useAtom, useAtomValue } from 'jotai';
 import Avatar from '../../avatar/Avatar';
 import styles from './HeaderButtons.module.css';
 import { useNavigate } from 'react-router-dom';
-import { cartNotFoundAtom, openCartAtom } from '../../../../stores/cartStore';
-import { userAtom } from '../../../../stores/userStore';
-import { cartAtom } from '../../../../stores/cartStore';
+import { cartNotFoundAtom, openCartAtom } from '../../../cart/atom/cartStore';
+import { userAtom } from '../../../users/atom/userStore';
+import { cartAtom } from '../../../cart/atom/cartStore';
 import { useEffect, useState } from 'react';
 
 export function HeaderButtons() {
@@ -18,7 +18,7 @@ export function HeaderButtons() {
   useEffect(() => {
     let a = 0;
     cart.map((i) => {
-      a += i[1];
+      a += i.quantity;
     });
     setAmount(a);
   }, [cart]);

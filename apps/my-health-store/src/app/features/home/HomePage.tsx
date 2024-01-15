@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import styles from './HomePage.module.css';
-import { userAtom } from '../../stores/userStore';
+import { userAtom } from '../users/atom/userStore';
 
 export function HomePage() {
   const [user] = useAtom(userAtom);

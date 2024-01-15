@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { updateUserAtom, userAtom } from '../../../stores/userStore';
+import { updateUserAtom, userAtom } from '../atom/userStore';
 import styles from './Profile.module.css';
 import ProfileAddress from './profileAddress/ProfileAddress';
 import ProfileEmail from './profileEmail/ProfileEmail';

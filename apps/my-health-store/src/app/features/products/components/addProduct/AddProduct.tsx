@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { ProductCreate } from 'apps/library';
 import SelectCategory from './selectCategory/SelectCategory';
 import { useAtom } from 'jotai';
-import { productForm } from '../../../../stores/productsStore';
+import { productForm } from '../../atom/productsStore';
 import CreateButton from './CreateButton/CreateButton';
 
 /* eslint-disable-next-line */

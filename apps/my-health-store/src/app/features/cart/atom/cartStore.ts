@@ -1,4 +1,4 @@
-import { CartType, ProductRead } from '../../../../library/index';
+import { CartType, ProductRead } from '../../../../../../library/index';
 import { atom } from 'jotai';
 
 export const openCartAtom = atom<boolean>(false);

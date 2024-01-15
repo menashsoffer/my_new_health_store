@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import styles from './signInName.module.css';
-import { createUserAtom } from '../../../../../stores/userStore';
+import { createUserAtom } from '../../../atom/userStore';
 import { useEffect } from 'react';
 
 const SignInName = () => {

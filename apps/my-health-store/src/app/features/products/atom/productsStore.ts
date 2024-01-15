@@ -3,7 +3,7 @@ import {
   CategoryRead,
   ProductCreate,
   ProductRead,
-} from '../../../../library/index';
+} from '../../../../../../library/index';
 
 export const productsListAtom = atom<ProductRead[]>([]);
 export const productForm = atom<ProductCreate>({

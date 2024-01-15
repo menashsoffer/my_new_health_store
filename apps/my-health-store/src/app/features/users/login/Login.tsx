@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { GET_USER_BY_EMAIL } from '../../../../graphql/query';
 import { useEffect, useState } from 'react';
-import { userAtom } from '../../../stores/userStore';
+import { userAtom } from '../atom/userStore';
 
 export function Login() {
   const navigate = useNavigate();

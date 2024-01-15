@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import styles from './signInEmail.module.css';
-import { createUserAtom } from '../../../../../stores/userStore';
+import { createUserAtom } from '../../../atom/userStore';
 import { useEffect } from 'react';
 
 const SignInEmail = () => {

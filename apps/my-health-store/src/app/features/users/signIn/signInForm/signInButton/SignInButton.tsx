@@ -5,7 +5,7 @@ import { CREATE_USER } from '../../../../../../graphql/mutation';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { createUserAtom } from '../../../../../stores/userStore';
+import { createUserAtom } from '../../../atom/userStore';
 import { useEffect } from 'react';
 
 const SignInButton = () => {

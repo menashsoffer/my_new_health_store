@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import Category from './categories/Category';
 import ProductDetailsNav from './productDetails/productDetailsNav/ProductDetailsNav';
-import { categoriesListAtom } from '../../../stores/productsStore';
+import { categoriesListAtom } from '../atom/productsStore';
 
 const breadcrumbs = [{ id: 1, name: 'Home', href: '/' }];
 

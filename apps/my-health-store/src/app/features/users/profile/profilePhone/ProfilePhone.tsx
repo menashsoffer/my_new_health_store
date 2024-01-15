@@ -1,5 +1,5 @@
 import styles from './ProfilePhone.module.css';
-import { updateUserAtom } from '../../../../stores/userStore';
+import { updateUserAtom } from '../../atom/userStore';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 

@@ -11,7 +11,7 @@ export const ProductModel = sequelize.define<Model<ProductRead, ProductCreate>>(
       allowNull: false,
     },
     product_description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     price: {
@@ -23,19 +23,19 @@ export const ProductModel = sequelize.define<Model<ProductRead, ProductCreate>>(
       allowNull: false,
     },
     image_src: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     image_alt: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     product_usage: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     ingredients: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },

@@ -4,7 +4,7 @@ import Cart from '../cart/Cart';
 import {
   categoriesListAtom,
   productsListAtom,
-} from '../../stores/productsStore';
+} from '../products/atom/productsStore';
 import { Outlet } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { trpc } from '../../../trpc/index';

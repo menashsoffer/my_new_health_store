@@ -7,7 +7,7 @@ import SignInPhone from './signInForm/signInPhone/signInPhone';
 import { useNavigate } from 'react-router-dom';
 import SignInButton from './signInForm/signInButton/SignInButton';
 import { useAtomValue } from 'jotai';
-import { createUserAtom } from '../../../stores/userStore';
+import { createUserAtom } from '../atom/userStore';
 import { useEffect } from 'react';
 
 export function SignIn() {
