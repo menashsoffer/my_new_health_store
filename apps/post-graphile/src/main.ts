@@ -14,6 +14,8 @@ app.use(
     watchPg: true,
     graphiql: true,
     enhanceGraphiql: true,
+    jwtSecret: 'secretKey038dsjhc@!$#',
+    jwtPgTypeIdentifier: 'users_for_store.jwt_token',
   }),
 );
 

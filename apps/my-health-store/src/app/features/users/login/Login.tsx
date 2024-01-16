@@ -1,15 +1,15 @@
 import styles from './Login.module.css';
 import { useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-import { useLazyQuery } from '@apollo/client';
-import { GET_USER_BY_EMAIL } from '../../../../graphql/query';
+import { useMutation } from '@apollo/client';
+import { GET_USER_BY_TOKEN } from '../../../../graphql/authenticate';
 import { useEffect, useState } from 'react';
 import { userAtom } from '../atom/userStore';
 
 export function Login() {
   const navigate = useNavigate();
   const setUser = useSetAtom(userAtom);
-  const [getUser, { data }] = useLazyQuery(GET_USER_BY_EMAIL);
+  const [loginUser, { data, error }] = useMutation(GET_USER_BY_TOKEN);
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -19,44 +19,56 @@ export function Login() {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
-  const checkUser = () => {
-    getUser({ variables: { email: form.email } });
+  const handleClick = async () => {
+    const { email, password } = form;
+    await loginUser({
+      variables: {
+        input: {
+          clientMutationId: 'menashe',
+          email,
+          password,
+        },
+      },
+    });
   };
 
   useEffect(() => {
-    if (data) click();
+    if (data) {
+      click();
+      // localStorage.setItem('token', data.authenticate.authResponse.jwtToken);
+      // const x = localStorage.getItem('token');
+      // console.log(x);
+    }
   }, [data]);
 
   const click = () => {
-    if (data.userByEmail.password === form.password) {
-      const {
-        id,
-        firstname,
-        lastname,
-        email,
-        password,
-        city,
-        street,
-        postalcode,
-        phonenumber,
-      } = data.userByEmail;
-      setUser({
-        id,
-        firstname,
-        lastname,
-        email,
-        password,
-        city,
-        street,
-        postalcode,
-        phonenumber,
-      });
-      navigate('/home');
-    } else {
-      console.log('not valid password');
-    }
+    const a = JSON.parse(data.authenticate.authResponse.userDetails);
+    const {
+      id,
+      firstname,
+      lastname,
+      email,
+      password,
+      city,
+      street,
+      postalcode,
+      phonenumber,
+    } = a;
+    const isadmin: boolean = false;
+    setUser({
+      id,
+      firstname,
+      lastname,
+      isadmin,
+      email,
+      password,
+      city,
+      street,
+      postalcode,
+      phonenumber,
+    });
+    navigate('/home');
   };
-
   return (
     <div className={styles['container']}>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -127,7 +139,7 @@ export function Login() {
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={() => checkUser()}
+                  onClick={() => handleClick()}
                 >
                   Sign in
                 </button>

@@ -5,6 +5,7 @@ export const userAtom = atom<User>({
   id: '',
   firstname: '',
   lastname: '',
+  isadmin: false,
   email: '',
   password: '',
   city: '',
@@ -16,6 +17,7 @@ export const userAtom = atom<User>({
 export const updateUserAtom = atom<InputUser>({
   firstname: '',
   lastname: '',
+  isadmin: false,
   email: '',
   password: '',
   city: '',
@@ -27,6 +29,7 @@ export const updateUserAtom = atom<InputUser>({
 export const createUserAtom = atom<InputUser>({
   firstname: '',
   lastname: '',
+  isadmin: false,
   email: '',
   password: '',
   city: '',

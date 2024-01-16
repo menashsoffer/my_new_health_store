@@ -36,6 +36,7 @@ const SignInButton = () => {
       street,
       postalcode,
     } = createUser;
+    const isadmin: boolean = false;
     createUserFn({
       variables: {
         input: {
@@ -44,6 +45,7 @@ const SignInButton = () => {
             firstname,
             lastname,
             email,
+            isadmin,
             password,
             phonenumber,
             city,

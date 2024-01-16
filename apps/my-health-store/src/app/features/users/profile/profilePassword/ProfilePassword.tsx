@@ -3,11 +3,6 @@ import { updateUserAtom } from '../../atom/userStore';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
-/* eslint-disable-next-line */
-// export interface ProfilePasswordProps {
-//   password: string;
-// }
-
 export function ProfilePassword() {
   const [updateUser, setUser] = useAtom(updateUserAtom);
 

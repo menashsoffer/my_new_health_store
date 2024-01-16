@@ -91,6 +91,7 @@ const Cart = () => {
                         </p>
                         <div className="mt-6">
                           <div
+                            role="button"
                             onClick={() => {
                               setOpen(false), navigate('/');
                             }}
