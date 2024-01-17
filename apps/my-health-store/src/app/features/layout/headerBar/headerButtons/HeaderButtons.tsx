@@ -7,7 +7,7 @@ import { userAtom } from '../../../users/atom/userStore';
 import { cartAtom } from '../../../cart/atom/cartStore';
 import { useEffect, useState } from 'react';
 
-export function HeaderButtons() {
+const HeaderButtons = () => {
   const navigate = useNavigate();
   const [amount, setAmount] = useState<number>(0);
   const [open, setOpen] = useAtom(openCartAtom);
@@ -90,6 +90,6 @@ export function HeaderButtons() {
       </div>
     </div>
   );
-}
+};
 
 export default HeaderButtons;

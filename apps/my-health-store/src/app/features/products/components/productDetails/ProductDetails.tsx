@@ -25,7 +25,7 @@ const ProductDetails = () => {
   ) : (
     <div className={styles['container']}>
       <div className="bg-white">
-        <div className="pt-6">
+        <div className="sm:py-10 lg:py-10">
           <ProductDetailsNav breadcrumbs={breadcrumbs} />
 
           {/* Image gallery */}

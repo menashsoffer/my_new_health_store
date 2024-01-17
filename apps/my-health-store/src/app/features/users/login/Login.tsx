@@ -4,20 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { GET_USER_BY_TOKEN } from '../../../../graphql/authenticate';
 import { useEffect, useState } from 'react';
-import { userAtom } from '../atom/userStore';
+import { token, userAtom } from '../atom/userStore';
+import EmailLogin from './emailLogin/EmailLogin';
+import PasswordLogin from './passwordLogin/PasswordLogin';
 
 export function Login() {
   const navigate = useNavigate();
   const setUser = useSetAtom(userAtom);
-  const [loginUser, { data, error }] = useMutation(GET_USER_BY_TOKEN);
+  const setToken = useSetAtom(token);
+  const [loginUser, { data }] = useMutation(GET_USER_BY_TOKEN);
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
-
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
 
   const handleClick = async () => {
     const { email, password } = form;
@@ -35,9 +34,7 @@ export function Login() {
   useEffect(() => {
     if (data) {
       click();
-      // localStorage.setItem('token', data.authenticate.authResponse.jwtToken);
-      // const x = localStorage.getItem('token');
-      // console.log(x);
+      localStorage.setItem('token', data.authenticate.authResponse.jwtToken);
     }
   }, [data]);
 
@@ -49,12 +46,12 @@ export function Login() {
       lastname,
       email,
       password,
+      isadmin,
       city,
       street,
       postalcode,
       phonenumber,
     } = a;
-    const isadmin: boolean = false;
     setUser({
       id,
       firstname,
@@ -67,6 +64,7 @@ export function Login() {
       postalcode,
       phonenumber,
     });
+    setToken(data.authenticate.authResponse.jwtToken);
     navigate('/home');
   };
   return (
@@ -85,55 +83,8 @@ export function Login() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="space-y-6">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={changeHandler}
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Password
-                </label>
-                <div className="text-sm">
-                  <div
-                    onClick={() => navigate('/')}
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </div>
-                </div>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={changeHandler}
-                />
-              </div>
-            </div>
+            <EmailLogin setForm={setForm} form={form} />
+            <PasswordLogin setForm={setForm} form={form} />
             {form.email !== '' && form.password !== '' ? (
               <div>
                 <button

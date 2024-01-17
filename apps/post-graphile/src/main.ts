@@ -5,6 +5,7 @@ import 'dotenv/config';
 
 const host = process.env.HOST;
 const port = process.env.POSTGRAPHILE ? Number(process.env.POSTGRAPHILE) : 3001;
+const jwtS = process.env.JWT_SECRET;
 
 const app = express();
 app.use(cors());
@@ -14,7 +15,7 @@ app.use(
     watchPg: true,
     graphiql: true,
     enhanceGraphiql: true,
-    jwtSecret: 'secretKey038dsjhc@!$#',
+    jwtSecret: jwtS,
     jwtPgTypeIdentifier: 'users_for_store.jwt_token',
   }),
 );

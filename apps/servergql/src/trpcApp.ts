@@ -1,10 +1,22 @@
 import { publicProcedure, router } from './trpcRouter';
 import { z } from 'zod';
 import { db } from './dal';
+import { checkToken } from './token/checkToken';
+import { TRPCError } from '@trpc/server';
 
 export const appRouter = router({
-  productsList: publicProcedure.query(async () => {
+  productsList: publicProcedure.query(async (opts) => {
+    if (!opts.ctx.user) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
+    }
     const products = await db.products.findMany();
+    return products;
+  }),
+  categoriesList: publicProcedure.query(async (opts) => {
+    if (!opts.ctx.user) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
+    }
+    const products = await db.categories.findMany();
     return products;
   }),
   addProduct: publicProcedure
@@ -21,6 +33,9 @@ export const appRouter = router({
       }),
     )
     .mutation(async (opts) => {
+      if (!opts.ctx.user) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
       const {
         categoryId,
         image_alt,
@@ -48,10 +63,6 @@ export const appRouter = router({
         console.log(error);
       }
     }),
-  categoriesList: publicProcedure.query(async () => {
-    const products = await db.categories.findMany();
-    return products;
-  }),
   addCategory: publicProcedure
     .input(
       z.object({
@@ -62,6 +73,9 @@ export const appRouter = router({
     )
     .mutation(async (opts) => {
       const { description, image_src, name } = opts.input;
+      if (!opts.ctx.user) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
       try {
         const addCategory = await db.categories.addCategory({
           description,

@@ -2,11 +2,11 @@ import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import { appRouter } from './trpcApp';
 import cors from 'cors';
 import connectToPG from './connectToDB';
-import testJwt from './jwt/jwt';
-// import { createProductsTable } from './sequelize';
+import { createContext } from './token/context';
 
 const server = createHTTPServer({
   router: appRouter,
+  createContext: createContext,
   middleware: cors(),
 });
 
@@ -15,8 +15,6 @@ server.server.on('listening', () => {
   console.log('\x1b[43m', 'server is up and running');
   connectToPG()
     .then(() => {
-      testJwt();
-      // createProductsTable();
       console.log('\x1b[42m', 'connected to DB');
     })
     .catch((error) => console.error('not connecting to DB', error));

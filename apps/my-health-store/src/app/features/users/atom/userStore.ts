@@ -39,3 +39,5 @@ export const createUserAtom = atom<InputUser>({
 });
 
 export const getUsers = atom<User[]>([]);
+
+export const token = atom<String>('');

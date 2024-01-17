@@ -1,9 +1,6 @@
 import classNames from 'classnames';
 import styles from './HeaderBarMenu.module.css';
 import { useNavigate } from 'react-router-dom';
-// import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-
-/* eslint-disable-next-line */
 
 const navigation = [
   { name: 'About', href: 'home' },
@@ -11,9 +8,7 @@ const navigation = [
   { name: 'Contact', href: '/' },
 ];
 
-interface HeaderBarMenuProps {}
-
-export function HeaderBarMenu(props: HeaderBarMenuProps) {
+const HeaderBarMenu = () => {
   const navigate = useNavigate();
   return (
     <div className={styles['container']}>
@@ -35,6 +30,6 @@ export function HeaderBarMenu(props: HeaderBarMenuProps) {
       </div>
     </div>
   );
-}
+};
 
 export default HeaderBarMenu;

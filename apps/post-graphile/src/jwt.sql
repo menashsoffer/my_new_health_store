@@ -2,9 +2,9 @@
 
 CREATE SCHEMA users_for_store
 
-CREATE TABLE users_for_store.users (
+ALTER TABLE users_for_store.users (
   id SERIAL PRIMARY KEY, 
-  isadmin BOOLEAN NOT NULL,
+  isadmin BOOLEAN NOT NULL DEFAULT false,
   firstname TEXT NOT NULL,
   lastname TEXT NOT NULL,
   email TEXT NOT NULL UNIQUE,
@@ -46,6 +46,7 @@ begin
     'email' , account.email,
     'firstname', account.firstname, 
     'lastname', account.lastname,
+    'isadmin', account.isadmin,
     'city' , account.city,
     'street' , account.street, 
     'postalcode', account.postalcode,
