@@ -1,60 +1,38 @@
 import styles from './ProductDetails.module.css';
+import { useAtom, useAtomValue } from 'jotai';
 import ProductDetailsNav from './productDetailsNav/ProductDetailsNav';
+import { productsListAtom } from '../../atom/productsStore';
+import { useParams } from 'react-router-dom';
+import { cartAtom } from '../../../cart/atom/cartStore';
+import { addToCart } from './fn/addToCartFn';
 
-/* eslint-disable-next-line */
-export interface ProductDetailsProps {}
+const ProductDetails = () => {
+  const { productId } = useParams();
+  const products = useAtomValue(productsListAtom);
+  const [cart, setCart] = useAtom(cartAtom);
 
-export const product = {
-  name: 'Basic Tee 6-Pack',
-  price: '$192',
-  breadcrumbs: [
+  const breadcrumbs = [
     { id: 1, name: 'Home', href: '/' },
-    { id: 2, name: 'Products', href: 'products' },
-    { id: 3, name: 'Products list', href: 'products/list' },
-  ],
-  images: [
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
-    },
-  ],
+    { id: 2, name: 'Products', href: '/products' },
+  ];
 
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-  highlights: [
-    'Hand cut and sewn locally',
-    'Dyed with our proprietary colors',
-    'Pre-washed & pre-shrunk',
-    'Ultra-soft 100% cotton',
-  ],
-  details:
-    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-};
+  const currentProduct = products.find(
+    (p) => String(p.id) === productId?.toString(),
+  );
 
-export function ProductDetails(props: ProductDetailsProps) {
-  return (
+  return currentProduct === undefined ? (
+    <div>hi</div>
+  ) : (
     <div className={styles['container']}>
       <div className="bg-white">
-        <div className="pt-6">
-          <ProductDetailsNav breadcrumbs={product.breadcrumbs} />
+        <div className="sm:py-10 lg:py-10">
+          <ProductDetailsNav breadcrumbs={breadcrumbs} />
 
           {/* Image gallery */}
           <div className="mx-auto mt-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
             <img
-              src={product.images[0].src}
-              alt={product.images[0].alt}
+              src={currentProduct?.image_src}
+              alt={currentProduct?.image_alt}
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -63,7 +41,7 @@ export function ProductDetails(props: ProductDetailsProps) {
           <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
               <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                {product.name}
+                {currentProduct?.product_name}
               </h1>
             </div>
 
@@ -71,16 +49,16 @@ export function ProductDetails(props: ProductDetailsProps) {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                {product.price}
+                {currentProduct?.price} $
               </p>
 
               <form className="mt-10">
-                <button
-                  type="submit"
+                <div
+                  onClick={() => setCart(() => addToCart(cart, currentProduct))}
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  Add to bag
-                </button>
+                  Add to cart
+                </div>
               </form>
             </div>
 
@@ -91,7 +69,7 @@ export function ProductDetails(props: ProductDetailsProps) {
 
                 <div className="space-y-6">
                   <p className="text-base text-gray-900">
-                    {product.description}
+                    {currentProduct?.product_description}
                   </p>
                 </div>
               </div>
@@ -100,23 +78,15 @@ export function ProductDetails(props: ProductDetailsProps) {
                 <h3 className="text-sm font-medium text-gray-900">
                   Highlights
                 </h3>
-
-                <div className="mt-4">
-                  <ul className="list-disc space-y-2 pl-4 text-sm">
-                    {product.highlights.map((highlight) => (
-                      <li key={highlight} className="text-gray-400">
-                        <span className="text-gray-600">{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
 
               <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
                 <div className="mt-4 space-y-6">
-                  <p className="text-sm text-gray-600">{product.details}</p>
+                  <p className="text-sm text-gray-600">
+                    {currentProduct?.product_usage}
+                  </p>
                 </div>
               </div>
             </div>
@@ -125,6 +95,6 @@ export function ProductDetails(props: ProductDetailsProps) {
       </div>
     </div>
   );
-}
+};
 
 export default ProductDetails;

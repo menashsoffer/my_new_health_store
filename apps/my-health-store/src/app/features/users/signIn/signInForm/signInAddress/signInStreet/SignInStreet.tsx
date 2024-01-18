@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { createUserAtom } from '../../../../../../stores/userStore';
+import { createUserAtom } from '../../../../atom/userStore';
 import { useAtom } from 'jotai';
 
 const SignInStreet = () => {

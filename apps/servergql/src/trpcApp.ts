@@ -1,10 +1,22 @@
 import { publicProcedure, router } from './trpcRouter';
 import { z } from 'zod';
 import { db } from './dal';
+import { checkToken } from './token/checkToken';
+import { TRPCError } from '@trpc/server';
 
 export const appRouter = router({
-  productsList: publicProcedure.query(async () => {
+  productsList: publicProcedure.query(async (opts) => {
+    if (!opts.ctx.user) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
+    }
     const products = await db.products.findMany();
+    return products;
+  }),
+  categoriesList: publicProcedure.query(async (opts) => {
+    if (!opts.ctx.user) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
+    }
+    const products = await db.categories.findMany();
     return products;
   }),
   addProduct: publicProcedure
@@ -13,7 +25,7 @@ export const appRouter = router({
         product_name: z.string(),
         product_description: z.string(),
         price: z.number(),
-        category: z.string(),
+        categoryId: z.number(),
         image_src: z.string().url(),
         image_alt: z.string(),
         product_usage: z.string(),
@@ -21,8 +33,11 @@ export const appRouter = router({
       }),
     )
     .mutation(async (opts) => {
+      if (!opts.ctx.user) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
       const {
-        category,
+        categoryId,
         image_alt,
         image_src,
         ingredients,
@@ -33,7 +48,7 @@ export const appRouter = router({
       } = opts.input;
       try {
         const addProduct = await db.products.addProduct({
-          category,
+          categoryId,
           image_alt,
           image_src,
           ingredients,
@@ -48,21 +63,31 @@ export const appRouter = router({
         console.log(error);
       }
     }),
-
-  // userById: publicProcedure.input(z.string()).query(async (opts) => {
-  //   const { input } = opts;
-  //   //      ^?
-  //   // Retrieve the user with the given ID
-  //   const user = await db.products.findById(input);
-  //   return user;
-  // }),
-  // userCreate: publicProcedure
-  //   .input(z.object({ id: z.string(), name: z.string() }))
-  //   .mutation(async (opts) => {
-  //     const { input } = opts;
-  //     const user = await db.user.create(input as UserTypes);
-  //     return user;
-  //   }),
+  addCategory: publicProcedure
+    .input(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        image_src: z.string().url(),
+      }),
+    )
+    .mutation(async (opts) => {
+      const { description, image_src, name } = opts.input;
+      if (!opts.ctx.user) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+      try {
+        const addCategory = await db.categories.addCategory({
+          description,
+          image_src,
+          name,
+        });
+        console.log('add product is successful', addCategory);
+        return addCategory;
+      } catch (error) {
+        console.log(error);
+      }
+    }),
 });
 
 export type AppRouter = typeof appRouter;

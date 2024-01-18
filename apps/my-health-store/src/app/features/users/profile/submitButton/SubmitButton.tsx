@@ -2,7 +2,7 @@ import styles from './SubmitButton.module.css';
 import { useMutation } from '@apollo/client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { updateUserAtom, userAtom } from '../../../../stores/userStore';
+import { updateUserAtom, userAtom } from '../../atom/userStore';
 import { UPDATE_USER } from '../../../../../graphql/mutation';
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';

@@ -1,23 +1,24 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import styles from './Cart.module.css';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { useAtom } from 'jotai';
-import { cartAtom } from '../../stores/cartStore';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { cartAtom, openCartAtom, checkOut } from './atom/cartStore';
 import CartItems from './cartItems/CartItems';
-import { ProductRead } from '../../../../../library/index';
-import { useNavigate } from 'react-router-dom';
 
-/* eslint-disable-next-line */
-export interface CartProps {
-  products: ProductRead[];
-  quantity: number;
-  setOpen: boolean;
-}
+const Cart = () => {
+  const [open, setOpen] = useAtom(openCartAtom);
+  const setCheckOut = useSetAtom(checkOut);
+  const [amount, setAmount] = useState<number>(0);
+  const cart = useAtomValue(cartAtom);
 
-export function Cart(props: CartProps) {
-  const navigate = useNavigate();
-  const [open, setOpen] = useAtom(cartAtom);
+  useEffect(() => {
+    let a = 0;
+    cart.map((i) => {
+      a += i.product.price * i.quantity;
+    });
+    setAmount(a);
+  }, [cart]);
 
   return (
     <div className={styles['container']}>
@@ -73,17 +74,7 @@ export function Cart(props: CartProps) {
                         <div className="mt-8">
                           <div className="flow-root">
                             <ul className="-my-6 divide-y divide-gray-200">
-                              {props.products ? (
-                                props.products.map((product, i) => (
-                                  <CartItems
-                                    key={i}
-                                    product={product}
-                                    quantity={props.quantity}
-                                  />
-                                ))
-                              ) : (
-                                <p> no products fund</p>
-                              )}
+                              <CartItems />
                             </ul>
                           </div>
                         </div>
@@ -92,14 +83,17 @@ export function Cart(props: CartProps) {
                       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotal</p>
-                          <p>$262.00</p>
+                          <p>{`${amount} $`}</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">
                           Shipping and taxes calculated at checkout.
                         </p>
                         <div className="mt-6">
                           <div
-                            onClick={() => navigate('/')}
+                            role="button"
+                            onClick={() => {
+                              setCheckOut(true);
+                            }}
                             className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                           >
                             Checkout
@@ -129,6 +123,6 @@ export function Cart(props: CartProps) {
       </Transition.Root>
     </div>
   );
-}
+};
 
 export default Cart;

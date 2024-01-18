@@ -1,28 +1,43 @@
 import styles from './Layout.module.css';
 import HeaderBar from './headerBar/HeaderBar';
 import Cart from '../cart/Cart';
-import { productsListAtom } from '../../stores/productsStore';
+import {
+  categoriesListAtom,
+  productsListAtom,
+} from '../products/atom/productsStore';
 import { Outlet } from 'react-router-dom';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { trpc } from '../../../trpc/index';
-import { ProductRead } from '../../../../../library/index';
-// import { useQuery } from '@apollo/client';
-// import { GET_USERS } from '../../../graphql/query';
+import CartNotFound from '../cart/cartNotFound/CartNotFound';
+import { useEffect } from 'react';
+import { token } from '../users/atom/userStore';
+import { CheckOut } from '../cart/checkOut/CheckOut';
 
 const Layout = () => {
   const [productsFromDb, setProducts] = useAtom(productsListAtom);
+  const [categoriesFromDb, setCategories] = useAtom(categoriesListAtom);
+  const currentToken = useAtomValue(token);
 
-  const myProducts = async () => {
-    const products: ProductRead[] = await trpc.productsList.query();
-    // console.log(products);
+  const myProductsAndCategories = async () => {
+    const products = await trpc.productsList.query();
+    const categories = await trpc.categoriesList.query();
+
     productsFromDb.length === 0 ? setProducts(products) : null;
+    categoriesFromDb.length === 0 ? setCategories(categories) : null;
   };
-  myProducts();
+
+  useEffect(() => {
+    if (productsFromDb.length === 0 && categoriesFromDb.length === 0) {
+      myProductsAndCategories();
+    }
+  }, [productsFromDb, categoriesFromDb, currentToken]);
 
   return (
     <div className={styles['container']}>
       <HeaderBar />
-      <Cart products={productsFromDb} quantity={3} setOpen={true} />
+      <Cart />
+      <CartNotFound />
+      <CheckOut />
       <Outlet />
     </div>
   );

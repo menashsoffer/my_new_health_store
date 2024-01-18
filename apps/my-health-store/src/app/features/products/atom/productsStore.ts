@@ -1,14 +1,24 @@
 import { atom } from 'jotai';
-import { ProductRead } from '../../../../library/index';
+import {
+  CategoryRead,
+  ProductCreate,
+  ProductRead,
+} from '../../../../../../library/index';
 
 export const productsListAtom = atom<ProductRead[]>([]);
+export const productForm = atom<ProductCreate>({
+  product_name: '',
+  product_description: '',
+  price: 0,
+  categoryId: 1,
+  image_src: '',
+  image_alt: '',
+  product_usage: '',
+  ingredients: '',
+});
 
+export const categoriesListAtom = atom<CategoryRead[]>([]);
 // const myProducts = async () => {
-//   // const test = await trpc.greeting.query({ name: '' });
-//   // const newUser = await trpc.userCreate.mutate({ id: 'sd', name: '' });
-//   const getProducts = await trpc.productsList.query();
-
-//   // console.log(getProducts[0]);
 //   // const addProduct = await trpc.addProduct.mutate({
 //   //   product_name: 'a',
 //   //   product_description: 'hi you',

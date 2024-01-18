@@ -1,11 +1,22 @@
 import styles from './Avatar.module.css';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { useAtomValue } from 'jotai';
+import { userAtom } from '../../users/atom/userStore';
 
 export function Avatar() {
   const navigate = useNavigate();
+  const user = useAtomValue(userAtom);
+  const categories = [
+    { id: 1, name: 'Create category', navigate: 'addCategory' },
+    {
+      id: 2,
+      name: 'Create product',
+      navigate: 'addProduct',
+    },
+  ];
 
   return (
     <div className={styles['container']}>
@@ -33,37 +44,50 @@ export function Avatar() {
           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
               {({ active }) => (
-                <div
+                <button
                   onClick={() => navigate(`/profile`)}
                   className={classNames(
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
+                    'w-full',
                   )}
                 >
                   Your Profile
-                </div>
+                </button>
               )}
             </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <div
-                  onClick={() => navigate('/home')}
-                  className={classNames(
-                    active ? 'bg-gray-100' : '',
-                    'block px-4 py-2 text-sm text-gray-700',
-                  )}
-                >
-                  Orders
-                </div>
-              )}
-            </Menu.Item>
+            {categories.map(
+              (category) =>
+                user.isadmin && (
+                  <Menu.Item key={category.id}>
+                    {({ active }) => (
+                      <div
+                        onClick={() => navigate(category.navigate)}
+                        className={classNames(
+                          active ? 'bg-gray-100' : '',
+                          'block px-4 py-2 text-sm text-gray-700',
+                          'w-full',
+                          'text-center',
+                        )}
+                      >
+                        {category.name}
+                      </div>
+                    )}
+                  </Menu.Item>
+                ),
+            )}
             <Menu.Item>
               {({ active }) => (
                 <a
+                  onClick={() => {
+                    localStorage.removeItem('token');
+                  }}
                   href="/"
                   className={classNames(
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
+                    'w-full',
+                    'text-center',
                   )}
                 >
                   Sign out

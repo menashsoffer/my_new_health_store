@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import styles from './signInPhone.module.css';
 import { useEffect } from 'react';
-import { createUserAtom } from '../../../../../stores/userStore';
+import { createUserAtom } from '../../../atom/userStore';
 
 const SignInPhone = () => {
   const [createUser, setUser] = useAtom(createUserAtom);

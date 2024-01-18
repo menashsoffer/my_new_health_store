@@ -1,62 +1,72 @@
-import { useSetAtom } from 'jotai';
 import styles from './Login.module.css';
+import { useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-import { useLazyQuery } from '@apollo/client';
-import { GET_USER_BY_EMAIL } from '../../../../graphql/query';
+import { useMutation } from '@apollo/client';
+import { GET_USER_BY_TOKEN } from '../../../../graphql/authenticate';
 import { useEffect, useState } from 'react';
-import { userAtom } from '../../../stores/userStore';
+import { token, userAtom } from '../atom/userStore';
+import EmailLogin from './emailLogin/EmailLogin';
+import PasswordLogin from './passwordLogin/PasswordLogin';
 
 export function Login() {
   const navigate = useNavigate();
   const setUser = useSetAtom(userAtom);
-  const [getUser, { data }] = useLazyQuery(GET_USER_BY_EMAIL);
+  const setToken = useSetAtom(token);
+  const [loginUser, { data }] = useMutation(GET_USER_BY_TOKEN);
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
 
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
-
-  const checkUser = () => {
-    getUser({ variables: { email: form.email } });
+  const handleClick = async () => {
+    const { email, password } = form;
+    await loginUser({
+      variables: {
+        input: {
+          clientMutationId: 'menashe',
+          email,
+          password,
+        },
+      },
+    });
   };
 
   useEffect(() => {
-    if (data) click();
+    if (data) {
+      click();
+      localStorage.setItem('token', data.authenticate.authResponse.jwtToken);
+    }
   }, [data]);
 
   const click = () => {
-    if (data.userByEmail.password === form.password) {
-      const {
-        id,
-        firstname,
-        lastname,
-        email,
-        password,
-        city,
-        street,
-        postalcode,
-        phonenumber,
-      } = data.userByEmail;
-      setUser({
-        id,
-        firstname,
-        lastname,
-        email,
-        password,
-        city,
-        street,
-        postalcode,
-        phonenumber,
-      });
-      navigate('/home');
-    } else {
-      console.log('not valid password');
-    }
+    const a = JSON.parse(data.authenticate.authResponse.userDetails);
+    const {
+      id,
+      firstname,
+      lastname,
+      email,
+      password,
+      isadmin,
+      city,
+      street,
+      postalcode,
+      phonenumber,
+    } = a;
+    setUser({
+      id,
+      firstname,
+      lastname,
+      isadmin,
+      email,
+      password,
+      city,
+      street,
+      postalcode,
+      phonenumber,
+    });
+    setToken(data.authenticate.authResponse.jwtToken);
+    navigate('/home');
   };
-
   return (
     <div className={styles['container']}>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -73,61 +83,14 @@ export function Login() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="space-y-6">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={changeHandler}
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Password
-                </label>
-                <div className="text-sm">
-                  <div
-                    onClick={() => navigate('/')}
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </div>
-                </div>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  onChange={changeHandler}
-                />
-              </div>
-            </div>
+            <EmailLogin setForm={setForm} form={form} />
+            <PasswordLogin setForm={setForm} form={form} />
             {form.email !== '' && form.password !== '' ? (
               <div>
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={() => checkUser()}
+                  onClick={() => handleClick()}
                 >
                   Sign in
                 </button>

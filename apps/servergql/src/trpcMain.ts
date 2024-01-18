@@ -2,9 +2,11 @@ import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import { appRouter } from './trpcApp';
 import cors from 'cors';
 import connectToPG from './connectToDB';
+import { createContext } from './token/context';
 
 const server = createHTTPServer({
   router: appRouter,
+  createContext: createContext,
   middleware: cors(),
 });
 
