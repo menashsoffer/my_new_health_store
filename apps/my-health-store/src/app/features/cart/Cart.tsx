@@ -2,14 +2,13 @@ import { Fragment, useEffect, useState } from 'react';
 import styles from './Cart.module.css';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { useAtom, useAtomValue } from 'jotai';
-import { cartAtom, openCartAtom } from './atom/cartStore';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { cartAtom, openCartAtom, checkOut } from './atom/cartStore';
 import CartItems from './cartItems/CartItems';
-import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-  const navigate = useNavigate();
   const [open, setOpen] = useAtom(openCartAtom);
+  const setCheckOut = useSetAtom(checkOut);
   const [amount, setAmount] = useState<number>(0);
   const cart = useAtomValue(cartAtom);
 
@@ -93,7 +92,7 @@ const Cart = () => {
                           <div
                             role="button"
                             onClick={() => {
-                              setOpen(false), navigate('/');
+                              setCheckOut(true);
                             }}
                             className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                           >

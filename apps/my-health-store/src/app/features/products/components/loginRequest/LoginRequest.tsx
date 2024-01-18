@@ -1,6 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './LoginRequest.module.css';
+import Images from './images/Images';
+import { imagesBottom, imagesMiddle, imagesTop } from './data/images';
 
 const LoginRequest = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles['container']}>
       <div className="relative overflow-hidden bg-white">
@@ -8,11 +12,18 @@ const LoginRequest = () => {
           <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
             <div className="sm:max-w-lg">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Summer styles are finally here
+                Welcome!
               </h1>
               <p className="mt-4 text-xl text-gray-500">
-                This year, our new summer collection will shelter you from the
-                harsh elements of a world that doesn't care if you live or die.
+                " We are passionate about helping our community live healthier,
+                happier lives. Our knowledgeable staff is ready to assist you in
+                finding the natural products, supplements, and resources you
+                need to support your wellness journey. We strive to cultivate an
+                environment of care, trust and mutual growth. Our shelves are
+                stocked with high-quality, ethically-sourced ingredients to
+                nourish your body, mind and spirit. We hope this becomes a place
+                of health and healing for you. Wishing you blessings on your
+                path to greater wellbeing!"
               </p>
             </div>
             <div>
@@ -25,70 +36,45 @@ const LoginRequest = () => {
                   <div className="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
                     <div className="flex items-center space-x-6 lg:space-x-8">
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                        <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
+                        {imagesTop.map((image, i) => (
+                          <Images
+                            key={i}
+                            id={image.id}
+                            className={image.className}
+                            src={image.src}
                           />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
+                        ))}
                       </div>
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
+                        {imagesMiddle.map((image, i) => (
+                          <Images
+                            key={i}
+                            id={image.id}
+                            className={image.className}
+                            src={image.src}
                           />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
+                        ))}
                       </div>
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
+                        {imagesBottom.map((image, i) => (
+                          <Images
+                            key={i}
+                            id={image.id}
+                            className={image.className}
+                            src={image.src}
                           />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
+                        ))}
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <a
-                  href="#"
+                <button
+                  onClick={() => navigate('/login')}
                   className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
                 >
-                  Shop Collection
-                </a>
+                  Login to view products
+                </button>
               </div>
             </div>
           </div>

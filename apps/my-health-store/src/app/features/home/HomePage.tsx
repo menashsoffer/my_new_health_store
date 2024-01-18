@@ -1,6 +1,7 @@
 import { useAtom } from 'jotai';
 import styles from './HomePage.module.css';
 import { userAtom } from '../users/atom/userStore';
+import MyMap from './map/Map';
 
 export function HomePage() {
   const [user] = useAtom(userAtom);
@@ -50,6 +51,9 @@ export function HomePage() {
                 loading="lazy"
               />
             </div>
+          </div>
+          <div className="row-start-1 col-start-2 col-span-2 invert">
+            <MyMap />
           </div>
         </main>
       </div>

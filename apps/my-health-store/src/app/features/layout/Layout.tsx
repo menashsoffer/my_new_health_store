@@ -11,6 +11,7 @@ import { trpc } from '../../../trpc/index';
 import CartNotFound from '../cart/cartNotFound/CartNotFound';
 import { useEffect } from 'react';
 import { token } from '../users/atom/userStore';
+import { CheckOut } from '../cart/checkOut/CheckOut';
 
 const Layout = () => {
   const [productsFromDb, setProducts] = useAtom(productsListAtom);
@@ -36,6 +37,7 @@ const Layout = () => {
       <HeaderBar />
       <Cart />
       <CartNotFound />
+      <CheckOut />
       <Outlet />
     </div>
   );
