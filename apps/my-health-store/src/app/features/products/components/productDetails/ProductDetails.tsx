@@ -5,6 +5,7 @@ import { productsListAtom } from '../../atom/productsStore';
 import { useParams } from 'react-router-dom';
 import { cartAtom } from '../../../cart/atom/cartStore';
 import { addToCart } from './fn/addToCartFn';
+import { Bounce, ToastContainer, Zoom, toast } from 'react-toastify';
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -15,6 +16,18 @@ const ProductDetails = () => {
     { id: 1, name: 'Home', href: '/' },
     { id: 2, name: 'Products', href: '/products' },
   ];
+  const notify = () =>
+    toast.success('Added to cart', {
+      position: 'bottom-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+      transition: Zoom,
+    });
 
   const currentProduct = products.find(
     (p) => String(p.id) === productId?.toString(),
@@ -40,7 +53,7 @@ const ProductDetails = () => {
           {/* Product info */}
           <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+              <h1 className=" text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                 {currentProduct?.product_name}
               </h1>
             </div>
@@ -54,14 +67,17 @@ const ProductDetails = () => {
 
               <form className="mt-10">
                 <div
-                  onClick={() => setCart(() => addToCart(cart, currentProduct))}
+                  onClick={() => {
+                    setCart(() => addToCart(cart, currentProduct));
+                    notify();
+                  }}
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Add to cart
                 </div>
               </form>
             </div>
-
+            <ToastContainer />
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
               {/* Description and details */}
               <div>
