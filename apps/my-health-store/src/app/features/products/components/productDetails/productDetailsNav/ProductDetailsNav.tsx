@@ -19,12 +19,12 @@ export function ProductDetailsNav(props: ProductDetailsNavProps) {
           {props.breadcrumbs.map((breadcrumb) => (
             <li key={breadcrumb.id}>
               <div className="flex items-center">
-                <div
+                <button
                   onClick={() => navigate(breadcrumb.href)}
                   className="mr-2 text-sm font-medium text-gray-900"
                 >
                   {breadcrumb.name}
-                </div>
+                </button>
                 <svg
                   width={16}
                   height={20}

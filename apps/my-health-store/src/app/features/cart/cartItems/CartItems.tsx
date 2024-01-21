@@ -4,6 +4,9 @@ import { useAtom, useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 import { cartAtom } from '../atom/cartStore';
 import CartNotFound from '../cartNotFound/CartNotFound';
+import PlusIcon from './icons/PlusIcon';
+import MinusIcon from './icons/MinusIcon';
+import { addOne, removeOne } from './fn/addAndRemove';
 
 const CartItems = () => {
   const navigate = useNavigate();
@@ -29,13 +32,13 @@ const CartItems = () => {
             <div>
               <div className="flex justify-between text-base font-medium text-gray-900">
                 <h3>
-                  <div
+                  <button
                     onClick={() =>
-                      navigate(`/products/list/${item.product.id}`)
+                      navigate(`/products/product/${item.product.id}`)
                     }
                   >
                     {item.product.product_name}
-                  </div>
+                  </button>
                 </h3>
                 <p className="ml-4">{item.product.price} $</p>
               </div>
@@ -43,8 +46,28 @@ const CartItems = () => {
                 {item.product.ingredients}
               </p>
             </div>
-            <div className="flex flex-1 items-end justify-between text-sm">
-              <div className="text-gray-500">Qty {item.quantity}</div>
+            <div className="flex flex-1 items-end justify-between text-sm mt-2">
+              <div className="flex flex-cols space-x-4">
+                <button
+                  className="bg-indigo-500 min-w-5 rounded-full p-1"
+                  onClick={() => {
+                    setCart(() => addOne(cart, item.product.id));
+                  }}
+                >
+                  <PlusIcon />
+                </button>
+                <div className="text-indigo-500 p-1">{item.quantity}</div>
+                {item.quantity > 1 && (
+                  <button
+                    className="bg-indigo-500 min-w-7 rounded-full p-1"
+                    onClick={() => {
+                      setCart(() => removeOne(cart, item.product.id));
+                    }}
+                  >
+                    <MinusIcon />
+                  </button>
+                )}
+              </div>
               <div className="flex">
                 <button
                   onClick={() => {

@@ -1,7 +1,6 @@
 import { publicProcedure, router } from './trpcRouter';
 import { z } from 'zod';
 import { db } from './dal';
-import { checkToken } from './token/checkToken';
 import { TRPCError } from '@trpc/server';
 
 export const appRouter = router({
