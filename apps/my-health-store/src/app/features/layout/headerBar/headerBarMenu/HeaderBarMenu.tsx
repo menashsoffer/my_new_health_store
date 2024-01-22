@@ -15,7 +15,7 @@ const HeaderBarMenu = () => {
       <div className="hidden sm:ml-6 sm:block">
         <div className="flex space-x-4">
           {navigation.map((item) => (
-            <div
+            <button
               key={item.name}
               onClick={() => navigate(item.href)}
               className={classNames(
@@ -24,7 +24,7 @@ const HeaderBarMenu = () => {
               )}
             >
               {item.name}
-            </div>
+            </button>
           ))}
         </div>
       </div>

@@ -57,9 +57,19 @@ const CartItems = () => {
                   <PlusIcon />
                 </button>
                 <div className="text-indigo-500 p-1">{item.quantity}</div>
-                {item.quantity > 1 && (
+                {item.quantity > 1 ? (
                   <button
                     className="bg-indigo-500 min-w-7 rounded-full p-1"
+                    onClick={() => {
+                      setCart(() => removeOne(cart, item.product.id));
+                    }}
+                  >
+                    <MinusIcon />
+                  </button>
+                ) : (
+                  <button
+                    disabled={true}
+                    className="bg-gray-500 min-w-7 rounded-full p-1"
                     onClick={() => {
                       setCart(() => removeOne(cart, item.product.id));
                     }}
