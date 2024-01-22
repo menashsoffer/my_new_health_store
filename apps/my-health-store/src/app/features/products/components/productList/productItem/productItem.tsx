@@ -17,7 +17,7 @@ export function ProductItem(props: ProductItemProps, key: number) {
       onClick={() => navigate(`/products/product/${props.product.id}`)}
     >
       {' '}
-      <div key={key} className="group relative">
+      <div key={key} className="group relative rounded-lg">
         <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
           <img
             key={key}

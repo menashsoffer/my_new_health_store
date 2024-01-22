@@ -5,7 +5,7 @@ import { productsListAtom } from '../../atom/productsStore';
 import { useParams } from 'react-router-dom';
 import { cartAtom } from '../../../cart/atom/cartStore';
 import { addToCart } from './fn/addToCartFn';
-import { Bounce, ToastContainer, Zoom, toast } from 'react-toastify';
+import { ToastContainer, Zoom, toast } from 'react-toastify';
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -14,7 +14,7 @@ const ProductDetails = () => {
 
   const breadcrumbs = [
     { id: 1, name: 'Home', href: '/' },
-    { id: 2, name: 'Products', href: '/products' },
+    { id: 2, name: 'Categories', href: '/products' },
   ];
   const notify = () =>
     toast.success('Added to cart', {
@@ -65,17 +65,17 @@ const ProductDetails = () => {
                 {currentProduct?.price} $
               </p>
 
-              <form className="mt-10">
+              <div className="cursor-pointer mt-10">
                 <div
                   onClick={() => {
                     setCart(() => addToCart(cart, currentProduct));
                     notify();
                   }}
-                  className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="  mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Add to cart
                 </div>
-              </form>
+              </div>
             </div>
             <ToastContainer />
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">

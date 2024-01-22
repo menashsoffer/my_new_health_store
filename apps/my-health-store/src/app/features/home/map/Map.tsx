@@ -1,81 +1,74 @@
-import React from 'react';
 import { fromLonLat } from 'ol/proj';
-import { Geometry, Point } from 'ol/geom';
-import { Geolocation as OLGeoLoc } from 'ol';
-import BaseEvent from 'ol/events/Event';
+import { LineString, Point } from 'ol/geom';
+import { RMap, ROSM } from 'rlayers';
+import Footer from './footer/Footer';
+import GeolocComp from './geolocComp/GeolocComp';
+import { buildRoute } from './fn/buildRoute';
+import { fillAddress } from './fn/fillAddress';
+import LineComp from './lineComp/LineComp';
 import 'ol/ol.css';
+import { Fragment, useEffect, useState } from 'react';
 
-import {
-  RMap,
-  ROSM,
-  RLayerVector,
-  RFeature,
-  RGeolocation,
-  RStyle,
-  useOL,
-} from 'rlayers';
-const locationIcon =
-  'https://cdn.jsdelivr.net/npm/rlayers/examples/./svg/location.svg';
+const Routing = () => {
+  const [start, setStart] = useState(null as unknown as Point);
+  const [finish, setFinish] = useState(null as unknown as Point);
+  enum Step {
+    START = 0,
+    FINISH = 1,
+  }
+  const [step, setStep] = useState(Step.START);
+  const [startAddress, setStartAddress] = useState('');
+  const [finishAddress, setFinishAddress] = useState('');
+  const [route, setRoute] = useState(null as unknown as LineString);
 
-function GeolocComp(): JSX.Element {
-  const [pos, setPos] = React.useState(
-    new Point(fromLonLat([32.5556, 34.854])),
-  );
-  const [accuracy, setAccuracy] = React.useState(
-    undefined as Geometry | undefined,
-  );
-  // Low-level access to the OpenLayers API
-  const { map } = useOL();
+  // On start change
+  useEffect(() => {
+    fillAddress(start).then((address) => setStartAddress(address));
+  }, [start]);
+
+  // On finish change
+  useEffect(() => {
+    fillAddress(finish).then((address) => setFinishAddress(address));
+  }, [finish]);
+
+  // When either one changes
+  useEffect(() => {
+    buildRoute(start, finish).then((line) => setRoute(line));
+  }, [start, finish]);
 
   return (
-    <>
-      <RGeolocation
-        tracking={true}
-        trackingOptions={{ enableHighAccuracy: true }}
-        onChange={React.useCallback(
-          (e: BaseEvent) => {
-            const geoloc = e.target as OLGeoLoc;
-            const position = geoloc.getPosition();
-            const accuracyGeometry = geoloc.getAccuracyGeometry();
-            if (position) {
-              setPos(new Point(position));
-            }
-            if (accuracyGeometry) {
-              setAccuracy(accuracyGeometry);
-            }
-            if (accuracyGeometry) {
-              map.getView().fit(accuracyGeometry, {
-                duration: 250,
-                maxZoom: 15,
-              });
-            }
-          },
-          [map],
-        )}
+    <Fragment>
+      <RMap
+        width={'full'}
+        height={'600px'}
+        className="example-map"
+        initial={{
+          center: fromLonLat([34.832365318005635, 32.09619472090213]),
+          zoom: 15,
+        }}
+        onClick={(e) => {
+          const coords = e.map.getCoordinateFromPixel(e.pixel);
+          if (step === Step.START) {
+            setFinish(null as unknown as Point);
+            setStart(new Point(coords));
+            setStep(Step.FINISH);
+          } else {
+            setFinish(new Point(coords));
+            setStep(Step.START);
+          }
+        }}
+      >
+        <ROSM />
+        <GeolocComp />
+        <LineComp start={start} finish={finish} route={route} />
+      </RMap>
+      <Footer
+        startAddress={startAddress}
+        finishAddress={finishAddress}
+        step={step}
       />
-      <RLayerVector zIndex={10}>
-        <RStyle.RStyle>
-          <RStyle.RIcon src={locationIcon} anchor={[0.5, 0.8]} />
-        </RStyle.RStyle>
-        <RFeature geometry={pos}></RFeature>
-        <RFeature geometry={accuracy}></RFeature>
-      </RLayerVector>
-    </>
-  );
-}
-
-const MyMap = () => {
-  return (
-    <RMap
-      width={'full'}
-      height={'600px'}
-      className="example-map"
-      initial={{ center: fromLonLat([32.5556, 34.854]), zoom: 4 }}
-    >
-      <ROSM />
-      <GeolocComp />
-    </RMap>
+    </Fragment>
   );
 };
 
-export default MyMap;
+export default Routing;

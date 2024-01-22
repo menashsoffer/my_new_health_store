@@ -3,9 +3,9 @@ import styles from './HeaderBarMenu.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const navigation = [
-  { name: 'About', href: 'home' },
+  { name: 'Home', href: 'home' },
   { name: 'Products', href: 'products' },
-  { name: 'Contact', href: '/' },
+  // { name: 'Contact', href: '/' },
 ];
 
 const HeaderBarMenu = () => {

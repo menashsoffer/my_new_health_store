@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './CartItems.module.css';
 import { useAtom, useAtomValue } from 'jotai';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { cartAtom } from '../atom/cartStore';
 import CartNotFound from '../cartNotFound/CartNotFound';
 import PlusIcon from './icons/PlusIcon';
@@ -11,6 +11,7 @@ import { addOne, removeOne } from './fn/addAndRemove';
 const CartItems = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useAtom(cartAtom);
+  const [disable, setDisable] = useState<boolean>(true);
 
   useEffect(() => {}, [cart]);
 
@@ -52,31 +53,26 @@ const CartItems = () => {
                   className="bg-indigo-500 min-w-5 rounded-full p-1"
                   onClick={() => {
                     setCart(() => addOne(cart, item.product.id));
+                    item.quantity > 1 ? setDisable(false) : setDisable(true);
                   }}
                 >
                   <PlusIcon />
                 </button>
                 <div className="text-indigo-500 p-1">{item.quantity}</div>
-                {item.quantity > 1 ? (
-                  <button
-                    className="bg-indigo-500 min-w-7 rounded-full p-1"
-                    onClick={() => {
-                      setCart(() => removeOne(cart, item.product.id));
-                    }}
-                  >
-                    <MinusIcon />
-                  </button>
-                ) : (
-                  <button
-                    disabled={true}
-                    className="bg-gray-500 min-w-7 rounded-full p-1"
-                    onClick={() => {
-                      setCart(() => removeOne(cart, item.product.id));
-                    }}
-                  >
-                    <MinusIcon />
-                  </button>
-                )}
+                <button
+                  disabled={disable}
+                  className={
+                    item.quantity > 1
+                      ? 'bg-indigo-500 min-w-7 rounded-full p-1'
+                      : 'cursor-not-allowed bg-indigo-300 min-w-7 rounded-full p-1'
+                  }
+                  onClick={() => {
+                    setCart(() => removeOne(cart, item.product.id));
+                    item.quantity > 1 ? setDisable(false) : setDisable(true);
+                  }}
+                >
+                  <MinusIcon />
+                </button>
               </div>
               <div className="flex">
                 <button

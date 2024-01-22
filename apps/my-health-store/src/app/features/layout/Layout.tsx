@@ -21,9 +21,12 @@ const Layout = () => {
   const myProductsAndCategories = async () => {
     const products = await trpc.productsList.query();
     const categories = await trpc.categoriesList.query();
-
-    productsFromDb.length === 0 ? setProducts(products) : null;
-    categoriesFromDb.length === 0 ? setCategories(categories) : null;
+    if (products.length > 0) {
+      productsFromDb.length === 0 ? setProducts(products) : null;
+    }
+    if (categories.length > 0) {
+      categoriesFromDb.length === 0 ? setCategories(categories) : null;
+    }
   };
 
   useEffect(() => {

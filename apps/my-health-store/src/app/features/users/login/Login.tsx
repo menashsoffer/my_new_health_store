@@ -17,6 +17,7 @@ export function Login() {
     email: '',
     password: '',
   });
+  const [disable, setDisable] = useState<boolean>(true);
 
   const handleClick = async () => {
     const { email, password } = form;
@@ -37,6 +38,10 @@ export function Login() {
       localStorage.setItem('token', data.authenticate.authResponse.jwtToken);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (form.email !== '' && form.password !== '') setDisable(false);
+  }, [form]);
 
   const click = () => {
     const a = JSON.parse(data.authenticate.authResponse.userDetails);
@@ -85,27 +90,31 @@ export function Login() {
           <div className="space-y-6">
             <EmailLogin setForm={setForm} form={form} />
             <PasswordLogin setForm={setForm} form={form} />
-            {form.email !== '' && form.password !== '' ? (
-              <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={() => handleClick()}
-                >
-                  Sign in
-                </button>
-              </div>
-            ) : null}
+
+            <div>
+              <button
+                disabled={disable}
+                type="submit"
+                className={
+                  disable
+                    ? 'flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+                    : 'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                }
+                onClick={() => handleClick()}
+              >
+                Sign in
+              </button>
+            </div>
           </div>
 
           <div className="mt-10 text-center text-sm text-gray-500">
             Unregistered?{' '}
-            <div
+            <button
               onClick={() => navigate('/signIn')}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Register here...
-            </div>
+            </button>
           </div>
         </div>
       </div>

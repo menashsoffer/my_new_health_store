@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import styles from './HomePage.module.css';
 import { userAtom } from '../users/atom/userStore';
-import MyMap from './map/Map';
+import Routing from './map/Map';
 
 export function HomePage() {
   const [user] = useAtom(userAtom);
@@ -16,9 +16,9 @@ export function HomePage() {
               Welcome {user.firstname}
             </h2>
             <p className="text-gray-700">
-              "Welcome to our health and wellness shop! We're thrilled you're
+              Welcome to our health and wellness shop! We're thrilled you're
               here and hope you find exactly what you need for your health
-              journey."
+              journey.
             </p>
           </section>
           <div className="grid grid-flow-col grid-rows-2 grid-cols-3 gap-8 justify-center">
@@ -29,7 +29,13 @@ export function HomePage() {
                 loading="lazy"
               />
             </div>
-            <div className="col-start-3 sepia"></div>
+            <div className="col-start-3 sepia">
+              <img
+                src="https://cdn.foreverliving.com/content/cards/images/home_aloeveragel_banner_1120x350_1669899485419.jpg"
+                alt=""
+                loading="lazy"
+              />
+            </div>
             <div className="saturate-200">
               <img
                 src="https://cdn.foreverliving.com/content/cards/images/home_aloeveragel_banner_1120x350_1669899485419.jpg"
@@ -52,8 +58,8 @@ export function HomePage() {
               />
             </div>
           </div>
-          <div className="row-start-1 col-start-2 col-span-2 invert">
-            <MyMap />
+          <div className="row-start-1 col-start-2 col-span-2 ">
+            <Routing />
           </div>
         </main>
       </div>

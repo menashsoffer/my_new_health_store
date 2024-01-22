@@ -7,6 +7,7 @@
     "phonenumber",
     "postalcode",
     "postgraphile",
+    "ROSM",
     "toastify",
     "trpc"
   ]

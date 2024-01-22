@@ -16,7 +16,7 @@ export function SignIn() {
 
   const hasEmpty = Object.values(createUser).includes('');
 
-  useEffect(() => {}, [createUser]);
+  useEffect(() => {}, [createUser, hasEmpty]);
 
   return (
     <div className={styles['container']}>
@@ -43,16 +43,16 @@ export function SignIn() {
             <SignInEmail />
             <SignInPassword />
             <Address />
-            {hasEmpty ? null : <SignInButton />}
+            <SignInButton hasEmptyBoolean={hasEmpty} />
           </form>
 
           <div className="mt-10 text-center text-sm text-gray-500">
-            <div
+            <button
               onClick={() => navigate('/')}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Go back to store
-            </div>
+            </button>
           </div>
         </div>
       </div>

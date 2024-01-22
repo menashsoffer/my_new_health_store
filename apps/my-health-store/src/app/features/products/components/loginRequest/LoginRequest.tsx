@@ -15,7 +15,7 @@ const LoginRequest = () => {
                 Welcome!
               </h1>
               <p className="mt-4 text-xl text-gray-500">
-                " We are passionate about helping our community live healthier,
+                We are passionate about helping our community live healthier,
                 happier lives. Our knowledgeable staff is ready to assist you in
                 finding the natural products, supplements, and resources you
                 need to support your wellness journey. We strive to cultivate an
@@ -23,7 +23,7 @@ const LoginRequest = () => {
                 stocked with high-quality, ethically-sourced ingredients to
                 nourish your body, mind and spirit. We hope this becomes a place
                 of health and healing for you. Wishing you blessings on your
-                path to greater wellbeing!"
+                path to greater wellbeing!
               </p>
             </div>
             <div>

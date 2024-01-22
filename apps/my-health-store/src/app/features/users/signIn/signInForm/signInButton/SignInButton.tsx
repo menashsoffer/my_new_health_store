@@ -8,7 +8,11 @@ import { useAtom } from 'jotai';
 import { createUserAtom } from '../../../atom/userStore';
 import { useEffect } from 'react';
 
-const SignInButton = () => {
+interface HasEmptyProps {
+  hasEmptyBoolean: boolean;
+}
+
+const SignInButton = (props: HasEmptyProps) => {
   const navigate = useNavigate();
   const [createUser] = useAtom(createUserAtom);
   const [createUserFn, { data }] = useMutation(CREATE_USER);
@@ -71,7 +75,12 @@ const SignInButton = () => {
       <div>
         <button
           type="submit"
-          className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          disabled={props.hasEmptyBoolean}
+          className={
+            props.hasEmptyBoolean
+              ? 'flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+              : 'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          }
           onClick={() => click()}
         >
           Sign in

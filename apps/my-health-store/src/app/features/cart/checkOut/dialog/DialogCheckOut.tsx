@@ -2,8 +2,29 @@ import styles from './DialogCheckOut.module.css';
 import ContactDetails from './contactDetails/ContactDetails';
 import CartItems from './cartItems/CartItems';
 import Form from './form/Form';
+import { useSetAtom } from 'jotai';
+import { cartAtom, checkOut } from '../../atom/cartStore';
+import { useNavigate } from 'react-router-dom';
+import { Bounce, ToastContainer, Zoom, toast } from 'react-toastify';
 
 const DialogCheckOut = () => {
+  const setCart = useSetAtom(cartAtom);
+  const setCheckOut = useSetAtom(checkOut);
+  const navigate = useNavigate();
+
+  const notify = () =>
+    toast.success('Yore order is sent', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+      transition: Bounce,
+    });
+
   return (
     <div className={styles['container']}>
       <div className="relative mx-auto w-full bg-white">
@@ -25,13 +46,18 @@ const DialogCheckOut = () => {
                 </button>
               </p>
               <button
-                onClick={() => {}}
+                onClick={() => {
+                  setCart([]);
+                  setCheckOut(false);
+                  notify();
+                }}
                 className="mt-4 inline-flex w-full items-center justify-center rounded bg-indigo-600 py-2.5 px-4 text-base font-semibold tracking-wide text-white text-opacity-80 outline-none ring-offset-2 transition hover:text-opacity-100 focus:ring-2 focus:ring-indigo-500 sm:text-lg"
               >
                 Place Order
               </button>
             </div>
           </div>
+          <ToastContainer />
           <div className="relative col-span-full flex flex-col py-6 pl-8 pr-4 sm:py-12 lg:col-span-4 lg:py-24">
             <div>
               <img
