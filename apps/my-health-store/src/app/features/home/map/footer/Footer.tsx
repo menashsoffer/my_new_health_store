@@ -1,14 +1,9 @@
 import styles from './Footer.module.css';
 
-enum Step {
-  START = 0,
-  FINISH = 1,
-}
 /* eslint-disable-next-line */
 export interface FooterProps {
   finishAddress: string;
   startAddress: string;
-  step: Step;
 }
 
 export function Footer(props: FooterProps) {
@@ -16,9 +11,7 @@ export function Footer(props: FooterProps) {
     <div className={styles['container']}>
       <div className="mx-0 mt-0 mb-3 p-1 w-100 jumbotron shadow bg-slate-500">
         <p>
-          <strong>
-            Select {props.step === Step.START ? 'START' : 'FINISH'} point
-          </strong>
+          <strong>Select A store point</strong>
         </p>
         <div className="d-flex mt-2 justify-content-between ">
           {props.startAddress.length == 0 ? null : (

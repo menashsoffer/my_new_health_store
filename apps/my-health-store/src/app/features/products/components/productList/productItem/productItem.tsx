@@ -29,7 +29,7 @@ export function ProductItem(props: ProductItemProps, key: number) {
         <div className="mt-4 flex justify-between">
           <div>
             <p className="mt-1 text-sm text-gray-500" key={key}>
-              {props.product.product_usage}
+              {props.product.product_name}
             </p>
           </div>
           <p className="text-sm font-medium text-gray-900" key={key}>

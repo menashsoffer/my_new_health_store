@@ -33,6 +33,7 @@ export function buildRoute(start: Point, finish: Point): Promise<LineString> {
   const URL =
     'https://router.project-osrm.org/route/v1/driving/' +
     `${startCoords[0]},${startCoords[1]};${finishCoords[0]},${finishCoords[1]}`;
+
   return fetch(URL)
     .then((r) => r.json())
     .then((data) => parseRoute(data.routes));

@@ -1,76 +1,39 @@
-import React from 'react';
-import { fromLonLat, transform } from 'ol/proj';
-import { Point, Geometry } from 'ol/geom';
-import { Geolocation as OLGeoLoc } from 'ol';
-import BaseEvent from 'ol/events/Event';
-import 'ol/ol.css';
-
-import { RLayerVector, RFeature, useOL, RGeolocation, RPopup } from 'rlayers';
+import { useRef } from 'react';
+import { fromLonLat } from 'ol/proj';
+import { Point } from 'ol/geom';
+import { RLayerVector, RFeature, RPopup } from 'rlayers';
 import { RStyle, RIcon } from 'rlayers/style';
+const stores = [
+  { point: [34.838, 32.10069], name: 'a סניף בני ברק', hours: '18:00 - 19:00' },
+  { point: [34.9, 32.1007], name: 'b סניף בני ברק', hours: '18:00 - 19:00' },
+  { point: [34.85, 32.108], name: 'c סניף בני ברק', hours: '18:00 - 19:00' },
+];
 
-/* eslint-disable-next-line */
-export interface GeolocCompProps {}
-
-export function GeolocComp(props: GeolocCompProps) {
-  const [pos, setPos] = React.useState(
-    new Point(fromLonLat([32.5556, 34.854])),
-  );
-  const [accuracy, setAccuracy] = React.useState(
-    undefined as Geometry | undefined,
-  );
+const GeolocComp = () => {
   const locationIcon =
     'https://cdn.jsdelivr.net/npm/rlayers/examples/./svg/location.svg';
-  // Low-level access to the OpenLayers API
-  const { map } = useOL();
-  const popup = React.useRef<RPopup>(null);
+  const popup = useRef<RPopup>(null);
   return (
     <>
-      <RGeolocation
-        tracking={true}
-        trackingOptions={{ enableHighAccuracy: true }}
-        onChange={React.useCallback(
-          (e: BaseEvent) => {
-            const geoloc = e.target as OLGeoLoc;
-            const position = geoloc.getPosition();
-            const accuracyGeometry = geoloc.getAccuracyGeometry();
-            if (position) {
-              setPos(new Point(position));
-            }
-            if (accuracyGeometry) {
-              setAccuracy(accuracyGeometry);
-            }
-            if (accuracyGeometry) {
-              map.getView().fit(accuracyGeometry, {
-                duration: 250,
-                maxZoom: 15,
-              });
-            }
-          },
-          [map],
-        )}
-      />
       <RLayerVector zIndex={10}>
-        <RFeature geometry={new Point(fromLonLat([34.838, 32.10069]))}>
-          <RStyle>
-            <RIcon src={locationIcon} anchor={[0.5, 0.8]} />
-          </RStyle>
-          <RPopup ref={popup} trigger={'click'} className="example-overlay">
-            <div className="card bg-indigo-500 rounded-2xl p-1">
-              <p className="card-header">
-                <strong>סניף בני ברק</strong>
-              </p>
-              <p className="card-body text-center">18:00 - 19:00</p>
-            </div>
-          </RPopup>
-        </RFeature>
-        <RStyle>
-          <RIcon src={locationIcon} anchor={[0.5, 0.8]} />
-        </RStyle>
-        <RFeature geometry={pos}></RFeature>
-        <RFeature geometry={accuracy}></RFeature>
+        {stores.map((store, i) => (
+          <RFeature key={i} geometry={new Point(fromLonLat(store.point))}>
+            <RStyle>
+              <RIcon src={locationIcon} anchor={[0.5, 0.8]} />
+            </RStyle>
+            <RPopup ref={popup} trigger={'hover'} className="example-overlay">
+              <div className="card bg-indigo-500 rounded-2xl p-1">
+                <p className="card-header">
+                  <strong>{store.name}</strong>
+                </p>
+                <p className="card-body text-center">{store.hours}</p>
+              </div>
+            </RPopup>
+          </RFeature>
+        ))}
       </RLayerVector>
     </>
   );
-}
+};
 
 export default GeolocComp;

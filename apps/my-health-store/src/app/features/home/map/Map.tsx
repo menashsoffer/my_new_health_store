@@ -1,30 +1,33 @@
 import { fromLonLat } from 'ol/proj';
 import { LineString, Point } from 'ol/geom';
-import { RMap, ROSM } from 'rlayers';
+import { RGeolocation, RMap, ROSM, useOL } from 'rlayers';
 import Footer from './footer/Footer';
 import GeolocComp from './geolocComp/GeolocComp';
 import { buildRoute } from './fn/buildRoute';
 import { fillAddress } from './fn/fillAddress';
 import LineComp from './lineComp/LineComp';
 import 'ol/ol.css';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
+import { Geolocation as OLGeoLoc } from 'ol';
+import BaseEvent from 'ol/events/Event';
+import YourLoction from './geolocComp/yourLoction/YourLoction';
 
 const Routing = () => {
-  const [start, setStart] = useState(null as unknown as Point);
+  const [pos, setPos] = useState(
+    new Point(fromLonLat([34.832365318005635, 32.09619472090213])),
+  );
+
   const [finish, setFinish] = useState(null as unknown as Point);
-  enum Step {
-    START = 0,
-    FINISH = 1,
-  }
-  const [step, setStep] = useState(Step.START);
+
   const [startAddress, setStartAddress] = useState('');
   const [finishAddress, setFinishAddress] = useState('');
   const [route, setRoute] = useState(null as unknown as LineString);
+  const { map } = useOL();
 
   // On start change
   useEffect(() => {
-    fillAddress(start).then((address) => setStartAddress(address));
-  }, [start]);
+    fillAddress(pos).then((address) => setStartAddress(address));
+  }, [pos]);
 
   // On finish change
   useEffect(() => {
@@ -33,40 +36,43 @@ const Routing = () => {
 
   // When either one changes
   useEffect(() => {
-    buildRoute(start, finish).then((line) => setRoute(line));
-  }, [start, finish]);
+    buildRoute(pos, finish).then((line) => setRoute(line));
+  }, [pos, finish]);
 
   return (
     <Fragment>
       <RMap
         width={'full'}
         height={'600px'}
-        className="example-map"
         initial={{
           center: fromLonLat([34.832365318005635, 32.09619472090213]),
-          zoom: 15,
+          zoom: 12,
         }}
         onClick={(e) => {
           const coords = e.map.getCoordinateFromPixel(e.pixel);
-          if (step === Step.START) {
-            setFinish(null as unknown as Point);
-            setStart(new Point(coords));
-            setStep(Step.FINISH);
-          } else {
-            setFinish(new Point(coords));
-            setStep(Step.START);
-          }
+          setFinish(new Point(coords));
         }}
       >
+        <RGeolocation
+          tracking={true}
+          trackingOptions={{ enableHighAccuracy: true }}
+          onChange={useCallback(
+            (e: BaseEvent) => {
+              const geoloc = e.target as OLGeoLoc;
+              const position = geoloc.getPosition();
+              if (position) {
+                setPos(new Point(position));
+              }
+            },
+            [map],
+          )}
+        />
         <ROSM />
         <GeolocComp />
-        <LineComp start={start} finish={finish} route={route} />
+        <YourLoction />
+        <LineComp start={pos} finish={finish} route={route} />
       </RMap>
-      <Footer
-        startAddress={startAddress}
-        finishAddress={finishAddress}
-        step={step}
-      />
+      <Footer startAddress={startAddress} finishAddress={finishAddress} />
     </Fragment>
   );
 };

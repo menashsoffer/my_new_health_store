@@ -33,7 +33,7 @@ const CreateButton = () => {
           categoryId,
           image_alt,
         })
-        .then(() => navigate('/'))
+        .then(() => navigate('/home'))
         .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);

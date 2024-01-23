@@ -61,17 +61,16 @@ export function Avatar() {
                 user.isadmin && (
                   <Menu.Item key={category.id}>
                     {({ active }) => (
-                      <div
-                        onClick={() => navigate(category.navigate)}
+                      <button
+                        onClick={() => navigate(`${category.navigate}`)}
                         className={classNames(
                           active ? 'bg-gray-100' : '',
                           'block px-4 py-2 text-sm text-gray-700',
                           'w-full',
-                          'text-center',
                         )}
                       >
                         {category.name}
-                      </div>
+                      </button>
                     )}
                   </Menu.Item>
                 ),
