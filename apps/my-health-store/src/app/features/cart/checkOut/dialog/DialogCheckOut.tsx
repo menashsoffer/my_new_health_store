@@ -57,7 +57,6 @@ const DialogCheckOut = () => {
               </button>
             </div>
           </div>
-          <ToastContainer />
           <div className="relative col-span-full flex flex-col py-6 pl-8 pr-4 sm:py-12 lg:col-span-4 lg:py-24">
             <div>
               <img
@@ -72,6 +71,7 @@ const DialogCheckOut = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
