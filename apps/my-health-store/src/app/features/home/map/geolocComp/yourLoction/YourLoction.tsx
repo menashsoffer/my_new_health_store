@@ -1,18 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { fromLonLat } from 'ol/proj';
-import { Geometry, Point, Polygon } from 'ol/geom';
+import { Point } from 'ol/geom';
 import { Geolocation as OLGeoLoc } from 'ol';
 import BaseEvent from 'ol/events/Event';
 import { RFeature, useOL, RGeolocation, RPopup, RLayerVector } from 'rlayers';
-import { RStyle, RIcon, RStroke } from 'rlayers/style';
+import { RStyle, RIcon } from 'rlayers/style';
 
 const YourLoction = () => {
-  console.log('hi 4');
   const [pos, setPos] = useState(
     new Point(fromLonLat([34.832365318005635, 32.09619472090213])),
   );
-
-  const [accuracy, setAccuracy] = useState(undefined as Geometry | undefined);
 
   const { map } = useOL();
   const locationIcon =
@@ -27,20 +24,11 @@ const YourLoction = () => {
         trackingOptions={{ enableHighAccuracy: true }}
         onChange={useCallback(
           (e: BaseEvent) => {
-            console.log('hi 5');
             const geoloc = e.target as OLGeoLoc;
             const position = geoloc.getPosition();
-            // const accuracyGeometry = geoloc.getAccuracyGeometry();
             if (position) {
               setPos(new Point(position));
             }
-            // if (accuracyGeometry) {
-            //   setAccuracy(accuracyGeometry);
-            // map.getView().fit(accuracyGeometry, {
-            //   // duration: 250,
-            //   // maxZoom: 15,
-            // });
-            // }
           },
           [map],
         )}
@@ -58,7 +46,6 @@ const YourLoction = () => {
             </div>
           </RPopup>
         </RFeature>
-        {/* <RFeature geometry={accuracy}></RFeature> */}
       </RLayerVector>
     </>
   );

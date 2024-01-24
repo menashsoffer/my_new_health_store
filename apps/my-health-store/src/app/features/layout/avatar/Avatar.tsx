@@ -57,9 +57,9 @@ export function Avatar() {
               )}
             </Menu.Item>
             {categories.map(
-              (category) =>
+              (category, i) =>
                 user.isadmin && (
-                  <Menu.Item key={category.id}>
+                  <Menu.Item key={i}>
                     {({ active }) => (
                       <button
                         onClick={() => navigate(`${category.navigate}`)}
