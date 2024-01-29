@@ -59,7 +59,6 @@ export function SubmitButton() {
   };
   useEffect(() => {
     if (data && data.updateUserByEmail) {
-      console.log(data);
       notify();
       setTimeout(() => navigate('/home'), 3000);
     }

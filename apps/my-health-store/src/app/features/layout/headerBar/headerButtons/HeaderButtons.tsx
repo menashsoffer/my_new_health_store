@@ -27,20 +27,6 @@ const HeaderButtons = () => {
   return (
     <div className={styles['container']}>
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <button
-          type="button"
-          className="relative rounded-full bg-gray-800 p-2 text-gray-400 hover:text-white "
-          onClick={() => {}}
-        >
-          <Moon />
-        </button>
-        <button
-          type="button"
-          className="relative rounded-full bg-gray-800 p-2 text-gray-400 hover:text-white "
-          onClick={() => {}}
-        >
-          <Son />
-        </button>
         <div className="relative inline-flex w-fit">
           {cart.length > 0 ? (
             <div className="absolute bottom-auto left-auto right-2 top-2 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">

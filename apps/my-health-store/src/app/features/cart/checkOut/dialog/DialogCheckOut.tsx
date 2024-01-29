@@ -38,10 +38,7 @@ const DialogCheckOut = () => {
               <Form />
               <p className="mt-10 text-center text-sm font-semibold text-indigo-500">
                 By placing this order you agree to the{' '}
-                <button
-                  // onClick={() => {}}
-                  className="whitespace-nowrap text-indigo-400 underline hover:text-indigo-600"
-                >
+                <button className="whitespace-nowrap text-indigo-400 underline hover:text-indigo-600">
                   Terms and Conditions
                 </button>
               </p>
@@ -50,6 +47,9 @@ const DialogCheckOut = () => {
                   setCart([]);
                   setCheckOut(false);
                   notify();
+                  setTimeout(() => {
+                    navigate('/home');
+                  }, 6000);
                 }}
                 className="mt-4 inline-flex w-full items-center justify-center rounded bg-indigo-600 py-2.5 px-4 text-base font-semibold tracking-wide text-white text-opacity-80 outline-none ring-offset-2 transition hover:text-opacity-100 focus:ring-2 focus:ring-indigo-500 sm:text-lg"
               >

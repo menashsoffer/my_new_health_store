@@ -6,15 +6,15 @@ import {
   productsListAtom,
 } from '../products/atom/productsStore';
 import { Outlet } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
 import { useAtom, useAtomValue } from 'jotai';
 import { trpc } from '../../../trpc/index';
 import CartNotFound from '../cart/cartNotFound/CartNotFound';
 import { useEffect } from 'react';
 import { token } from '../users/atom/userStore';
 import { CheckOut } from '../cart/checkOut/CheckOut';
-import { themeDark, themeLight } from './global/theme';
-import { Provider } from 'react-redux';
+// import { ThemeProvider } from 'styled-components';
+// import { themeDark, themeLight } from './global/theme';
+// import { Provider } from 'react-redux';
 // import { store } from '../../redux/store';
 
 const Layout = () => {

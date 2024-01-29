@@ -12,8 +12,8 @@ const HeaderBarMenu = () => {
   const navigate = useNavigate();
   return (
     <div className={styles['container']}>
-      <div className="hidden sm:ml-6 sm:block">
-        <div className="flex space-x-4">
+      <div className="hidden md:block">
+        <div className="ml-10 flex items-baseline space-x-4">
           {navigation.map((item) => (
             <button
               key={item.name}
