@@ -39,7 +39,7 @@ export function LineComp(props: LineCompProps) {
             <RFill color="blue" />
           </RCircle>
         </RStyle>
-        <RFeature key={0} geometry={pos} />
+        {/* <RFeature key={0} geometry={pos} /> */}
         <RFeature key={1} geometry={props.finish} />
         <RFeature key={2} geometry={props.route}>
           <RStyle>
