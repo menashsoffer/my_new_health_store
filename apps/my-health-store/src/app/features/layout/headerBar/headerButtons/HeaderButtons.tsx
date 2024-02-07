@@ -6,7 +6,7 @@ import { cartNotFoundAtom, openCartAtom } from '../../../cart/atom/cartStore';
 import { userAtom } from '../../../users/atom/userStore';
 import { cartAtom } from '../../../cart/atom/cartStore';
 import { useEffect, useState } from 'react';
-import { Moon, Son } from './svg/Svg';
+// import { Moon, Son } from './svg/Svg';
 
 const HeaderButtons = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const HeaderButtons = () => {
 
   return (
     <div className={styles['container']}>
-      <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div className=" inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <div className="relative inline-flex w-fit">
           {cart.length > 0 ? (
             <div className="absolute bottom-auto left-auto right-2 top-2 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">

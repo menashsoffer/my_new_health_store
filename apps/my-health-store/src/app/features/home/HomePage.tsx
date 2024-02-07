@@ -11,7 +11,7 @@ export function HomePage() {
         <header className="flex items-center justify-between w-full mb-8 bg-red-500"></header>
 
         <main>
-          <section className="text-center mb- ">
+          <section className="text-center mb-10 ">
             <h2 className="text-5xl font-bold mb-8">
               Welcome {user.firstname}
             </h2>

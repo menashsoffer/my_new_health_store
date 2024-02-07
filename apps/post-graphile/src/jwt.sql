@@ -1,8 +1,8 @@
--- Active: 1704194199087@@127.0.0.1@5432@Forever-project
+-- Active: 1707311171936@@dpg-cn1nht8l5elc73da63cg-a.frankfurt-postgres.render.com@5432@health_store_habh@public
 
 CREATE SCHEMA users_for_store
 
-ALTER TABLE users_for_store.users (
+CREATE TABLE users_for_store.users (
   id SERIAL PRIMARY KEY, 
   isadmin BOOLEAN NOT NULL DEFAULT false,
   firstname TEXT NOT NULL,

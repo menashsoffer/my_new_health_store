@@ -10,8 +10,7 @@ const stores = [
 ];
 
 const GeolocComp = () => {
-  const locationIcon =
-    'https://cdn.jsdelivr.net/npm/rlayers/examples/./svg/location.svg';
+  const storeIcon = '../../../../../../public/storeIcon.svg';
   const popup = useRef<RPopup>(null);
   return (
     <>
@@ -19,8 +18,9 @@ const GeolocComp = () => {
         {stores.map((store, i) => (
           <RFeature key={i} geometry={new Point(fromLonLat(store.point))}>
             <RStyle>
-              <RIcon src={locationIcon} anchor={[0.5, 0.8]} />
+              <RIcon src={storeIcon} anchor={[0.5, 0.8]} />
             </RStyle>
+
             <RPopup ref={popup} trigger={'hover'} className="example-overlay">
               <div className="card bg-indigo-500 rounded-2xl p-1">
                 <p className="card-header">

@@ -44,7 +44,7 @@ export function Login() {
   }, [form]);
 
   const click = () => {
-    const a = JSON.parse(data.authenticate.authResponse.userDetails);
+    const a = data.authenticate.authResponse.userDetails;
     const {
       id,
       firstname,

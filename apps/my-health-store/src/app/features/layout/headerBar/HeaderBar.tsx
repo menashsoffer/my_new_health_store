@@ -38,9 +38,9 @@ export function HeaderBar() {
                       <div className="ml-4 flex items-center md:ml-6">
                         {/* Profile dropdown */}
                         <Menu as="div" className="relative ml-3">
-                          <div>
-                            <HeaderButtons />
-                          </div>
+                          {/* <div> */}
+                          <HeaderButtons />
+                          {/* </div> */}
                           <Transition
                             as={Fragment}
                             enter="transition ease-out duration-100"
@@ -93,26 +93,29 @@ export function HeaderBar() {
                 </div>
 
                 <Disclosure.Panel className="md:hidden">
-                  <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                    {navigation.map((item) => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as="button"
-                        onClick={() => navigate(item.href)}
-                        className={classNames(
-                          item
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'block rounded-md px-3 py-2 text-base font-medium',
-                        )}
-                        aria-current={item.name ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))}
-                    <div className="relative h-6 ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <HeaderButtons />
+                  <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 flex justify-between">
+                    <div>
+                      {navigation.map((item) => (
+                        <Disclosure.Button
+                          key={item.name}
+                          as="button"
+                          onClick={() => navigate(item.href)}
+                          className={classNames(
+                            item
+                              ? 'bg-gray-900 text-white'
+                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                            ' rounded-md px-3 py-2 text-base font-medium ml-2',
+                          )}
+                          aria-current={item.name ? 'page' : undefined}
+                        >
+                          {item.name}
+                        </Disclosure.Button>
+                      ))}
                     </div>
+
+                    {/* <div className="relative h-6 ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"> */}
+                    <HeaderButtons />
+                    {/* </div> */}
                   </div>
                 </Disclosure.Panel>
               </>
