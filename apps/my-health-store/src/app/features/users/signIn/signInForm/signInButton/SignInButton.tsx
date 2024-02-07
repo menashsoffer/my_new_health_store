@@ -15,7 +15,7 @@ interface HasEmptyProps {
 const SignInButton = (props: HasEmptyProps) => {
   const navigate = useNavigate();
   const [createUser] = useAtom(createUserAtom);
-  const [createUserFn, { data }] = useMutation(CREATE_USER);
+  const [createUserFn] = useMutation(CREATE_USER);
 
   const notify = () =>
     toast.success('your user is created successfully!', {
@@ -58,16 +58,18 @@ const SignInButton = (props: HasEmptyProps) => {
           },
         },
       },
+    }).then(() => {
+      notify();
+      setTimeout(() => navigate('/home'), 3000);
     });
   };
 
-  useEffect(() => {
-    if (data && data.updateUserByEmail) {
-      console.log(data);
-      notify();
-      setTimeout(() => navigate('/home'), 3000);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data && data.updateUserByEmail) {
+  //     console.log(data);
+
+  //   }
+  // }, [data]);
 
   return (
     <div className={styles['container']}>
