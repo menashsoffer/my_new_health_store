@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { createUserAtom } from '../../../atom/userStore';
+import { useEffect, useState } from 'react';
 
 interface HasEmptyProps {
   hasEmptyBoolean: boolean;
@@ -14,7 +15,8 @@ interface HasEmptyProps {
 const SignInButton = (props: HasEmptyProps) => {
   const navigate = useNavigate();
   const [createUser] = useAtom(createUserAtom);
-  const [createUserFn, { data, loading }] = useMutation(CREATE_USER);
+  const [createUserFn, { loading }] = useMutation(CREATE_USER);
+  const [isLoading, setIsLoading] = useState(loading);
 
   const notify = () =>
     toast.success('נרשמת בהצלחה!', {
@@ -60,9 +62,15 @@ const SignInButton = (props: HasEmptyProps) => {
       },
     }).then(() => {
       notify();
-      setTimeout(() => navigate('/home'), 3000);
+      setTimeout(() => navigate('/login'), 3000);
+    });
+  };
+
+  useEffect(() => {
+    if (isLoading === false) {
+      setIsLoading(loading);
     }
-  }, [data]);
+  }, [loading]);
 
   return (
     <div className={styles['container']}>
@@ -70,9 +78,9 @@ const SignInButton = (props: HasEmptyProps) => {
       <div>
         <button
           type="submit"
-          disabled={props.hasEmptyBoolean}
+          disabled={isLoading}
           className={
-            props.hasEmptyBoolean
+            props.hasEmptyBoolean || isLoading
               ? 'cursor-not-allowed flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
               : 'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
           }
