@@ -61,8 +61,8 @@ const SignInButton = (props: HasEmptyProps) => {
     }).then(() => {
       notify();
       setTimeout(() => navigate('/home'), 3000);
-    });
-  };
+    }
+  }, [data]);
 
   return (
     <div className={styles['container']}>
