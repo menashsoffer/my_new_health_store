@@ -13,8 +13,8 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
 const navigation = [
-  { name: 'Home', href: 'home' },
-  { name: 'Products', href: 'products' },
+  { name: 'דף הבית', href: 'home' },
+  { name: 'מוצרים', href: 'products' },
   // { name: 'Contact', href: '/' },
 ];
 

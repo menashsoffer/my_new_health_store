@@ -7,9 +7,9 @@ describe('ProductDetailsNav', () => {
     const { baseElement } = render(
       <ProductDetailsNav
         breadcrumbs={[
-          { id: 1, name: 'Home', href: '/' },
-          { id: 2, name: 'Products', href: 'products' },
-          { id: 3, name: 'Products list', href: 'products/list' },
+          { id: 1, name: 'דף הבית', href: '/' },
+          { id: 2, name: 'קטגוריות', href: 'products' },
+          { id: 3, name: 'מוצרים', href: 'products/list' },
         ]}
       />,
     );

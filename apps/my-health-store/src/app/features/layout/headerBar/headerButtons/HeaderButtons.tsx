@@ -66,7 +66,7 @@ const HeaderButtons = () => {
             className="relative rounded-full bg-gray-800 p-2 text-gray-400 hover:text-white"
             onClick={() => navigate('login')}
           >
-            login
+            התחברות
           </button>
         )}
       </div>

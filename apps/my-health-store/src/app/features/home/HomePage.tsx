@@ -13,14 +13,14 @@ export function HomePage() {
         <main>
           <section className="text-center mb-10 ">
             <h2 className="text-5xl font-bold mb-8">
-              Welcome {user.firstname}
+              {user.firstname} ברוכים הבאים
             </h2>
             <p className="text-gray-700 font-semibold text-2xl ">
-              Welcome to our health and wellness shop!
+              !ברוכים הבאים לחנות הבריאות שלנו
             </p>
             <p className="text-gray-700 font-semibold text-2xl ">
-              We're thrilled you're here and hope you find exactly what you need
-              for your health journey.
+              אנו שמחים שאתה כאן ומקווים שתמצא בדיוק את מה שאתה צריך למסע
+              הבריאות שלך
             </p>
           </section>
           {/* <div className="grid grid-flow-col grid-rows-2 grid-cols-3 gap-8 justify-center">

@@ -10,10 +10,10 @@ export function Avatar() {
   const navigate = useNavigate();
   const user = useAtomValue(userAtom);
   const categories = [
-    { id: 1, name: 'Create category', navigate: 'addCategory' },
+    { id: 1, name: 'יצירת קטגוריה חדשה', navigate: 'addCategory' },
     {
       id: 2,
-      name: 'Create product',
+      name: 'יצירת מוצר חדש',
       navigate: 'addProduct',
     },
   ];
@@ -52,7 +52,7 @@ export function Avatar() {
                     'w-full',
                   )}
                 >
-                  Your Profile
+                  הפרופיל שלך
                 </button>
               )}
             </Menu.Item>
@@ -89,7 +89,7 @@ export function Avatar() {
                     'text-center',
                   )}
                 >
-                  Sign out
+                  יציאה
                 </a>
               )}
             </Menu.Item>

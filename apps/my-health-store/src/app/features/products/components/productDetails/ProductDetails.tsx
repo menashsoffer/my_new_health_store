@@ -13,9 +13,10 @@ const ProductDetails = () => {
   const [cart, setCart] = useAtom(cartAtom);
 
   const breadcrumbs = [
-    { id: 1, name: 'Home', href: '/' },
-    { id: 2, name: 'Categories', href: '/products' },
+    { id: 1, name: 'דף הבית', href: '/' },
+    { id: 2, name: 'קטגוריות', href: '/products' },
   ];
+
   const notify = () =>
     toast.success('Added to cart', {
       position: 'bottom-right',
@@ -40,6 +41,7 @@ const ProductDetails = () => {
       <div className="bg-white">
         <div className="sm:py-10 lg:py-10">
           <ProductDetailsNav breadcrumbs={breadcrumbs} />
+
           <div className="mx-auto mt-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
             <img
               src={currentProduct?.image_src}
@@ -66,7 +68,7 @@ const ProductDetails = () => {
                   }}
                   className="  mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  Add to cart
+                  הוסף לעגלה
                 </div>
               </div>
             </div>
