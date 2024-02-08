@@ -2,9 +2,14 @@ import { useEffect, useState } from 'react';
 import styles from './AddAcategory.module.css';
 import { useNavigate } from 'react-router-dom';
 import { trpc } from '../../../../../trpc/index';
+import { useAtomValue } from 'jotai';
+import { token, userAtom } from '../../../users/atom/userStore';
 
 const AddAcategory = () => {
   const navigate = useNavigate();
+  const user = useAtomValue(userAtom);
+  const currentToken = useAtomValue(token);
+
   const [form, setForm] = useState({
     name: '',
     image_src: '',
@@ -32,6 +37,12 @@ const AddAcategory = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (user.isadmin !== true || !currentToken) {
+      navigate('/home');
+    }
+  }, [user, currentToken]);
 
   return (
     <div className={styles['container']}>

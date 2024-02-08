@@ -1,11 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './HeaderBarLogo.module.css';
 
-/* eslint-disable-next-line */
-export interface HeaderBarLogoProps {}
-
-export function HeaderBarLogo(props: HeaderBarLogoProps) {
+const HeaderBarLogo = () => {
+  const navigate = useNavigate();
   return (
-    <div className={styles['container']}>
+    <div className={styles['container']} onClick={() => navigate('/home')}>
       <div className=" flex-shrink-0 ">
         <img
           className="h-8 w-8 "
@@ -15,6 +14,6 @@ export function HeaderBarLogo(props: HeaderBarLogoProps) {
       </div>
     </div>
   );
-}
+};
 
 export default HeaderBarLogo;

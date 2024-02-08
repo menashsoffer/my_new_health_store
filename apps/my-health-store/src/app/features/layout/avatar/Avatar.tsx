@@ -4,7 +4,7 @@ import { Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
-import { userAtom } from '../../users/atom/userStore';
+import { token, userAtom } from '../../users/atom/userStore';
 
 export function Avatar() {
   const navigate = useNavigate();

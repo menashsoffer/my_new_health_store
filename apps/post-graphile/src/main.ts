@@ -16,7 +16,6 @@ export const post = postgraphile(
     user: process.env.USER_NAME,
     password: process.env.PASSWORD,
     host: process.env.PG_HOST,
-    // port: process.env.PORT as unknown as number,
     ssl: true,
   },
   'users_for_store',
@@ -33,14 +32,6 @@ export const post = postgraphile(
 );
 
 app.use(post);
-//   postgraphile(process.env.POSTGRES_LOCAL, 'users_for_store', {
-//     watchPg: true,
-//     graphiql: true,
-//     enhanceGraphiql: true,
-//     jwtSecret: jwtS,
-//     jwtPgTypeIdentifier: 'users_for_store.jwt_token',
-//   }),
-// );
 
 app.listen(port, host, () => {
   console.log(`ready on http://${host}:${port}`);

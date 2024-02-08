@@ -2,14 +2,17 @@ import styles from './AddProduct.module.css';
 import { useEffect, useState } from 'react';
 import { ProductCreate } from 'apps/library';
 import SelectCategory from './selectCategory/SelectCategory';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { productForm } from '../../atom/productsStore';
 import CreateButton from './CreateButton/CreateButton';
+import { token, userAtom } from '../../../users/atom/userStore';
+import { useNavigate } from 'react-router-dom';
 
-/* eslint-disable-next-line */
-export interface AddProductProps {}
+const AddProduct = () => {
+  const navigate = useNavigate();
 
-const AddProduct = (props: AddProductProps) => {
+  const user = useAtomValue(userAtom);
+  const currentToken = useAtomValue(token);
   const [atom, setAtom] = useAtom(productForm);
 
   const [form, setForm] = useState<ProductCreate>(atom);
@@ -23,6 +26,12 @@ const AddProduct = (props: AddProductProps) => {
   useEffect(() => {
     if (form) setAtom(form);
   }, [form]);
+
+  useEffect(() => {
+    if (user.isadmin !== true || !currentToken) {
+      navigate('/home');
+    }
+  }, [user, currentToken]);
 
   return (
     <div className={styles['container']}>
@@ -39,7 +48,7 @@ const AddProduct = (props: AddProductProps) => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" method="POST">
             <div>
               <label
                 htmlFor="product_name"

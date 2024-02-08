@@ -14,9 +14,13 @@ export function SignIn() {
   const navigate = useNavigate();
   const createUser = useAtomValue(createUserAtom);
 
-  const hasEmpty = Object.values(createUser).includes('');
+  const values = Object.values(createUser);
+  const hasEmpty = values.includes('');
+  const hasZeroOrNegative = values.some((value) => {
+    return typeof value === 'number' && value <= 0;
+  });
 
-  useEffect(() => {}, [createUser, hasEmpty]);
+  const isValid = !hasEmpty && !hasZeroOrNegative;
 
   return (
     <div className={styles['container']}>
@@ -43,7 +47,7 @@ export function SignIn() {
             <SignInEmail />
             <SignInPassword />
             <Address />
-            <SignInButton hasEmptyBoolean={hasEmpty} />
+            <SignInButton hasEmptyBoolean={!isValid} />
           </form>
 
           <div className="mt-10 text-center text-sm text-gray-500">
