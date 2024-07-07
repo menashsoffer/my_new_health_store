@@ -3,6 +3,8 @@ import styles from './signInEmail.module.css';
 import { createUserAtom } from '../../../atom/userStore';
 import { useEffect } from 'react';
 
+const emailAddress = 'כתובת מייל';
+
 const SignInEmail = () => {
   const [createUser, setUser] = useAtom(createUserAtom);
 
@@ -17,12 +19,12 @@ const SignInEmail = () => {
   return (
     <div className={styles['container']}>
       <div id="emailDiv" className="flex">
-        <div className="  sm:w-full">
+        <div className="  sm:w-full" dir="rtl">
           <label
             htmlFor="email"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Email address
+            {emailAddress}
           </label>
           <div className="mt-2">
             <input

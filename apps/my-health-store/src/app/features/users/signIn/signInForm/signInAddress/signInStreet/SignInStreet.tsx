@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { createUserAtom } from '../../../../atom/userStore';
 import { useAtom } from 'jotai';
 
+const street = 'רחוב';
+
 const SignInStreet = () => {
   const [createUser, setUser] = useAtom(createUserAtom);
 
@@ -20,7 +22,7 @@ const SignInStreet = () => {
           htmlFor="street"
           className="block text-sm font-medium leading-6 text-gray-900 "
         >
-          Street
+          {street}
         </label>
       </div>
       <div className="mt-2">

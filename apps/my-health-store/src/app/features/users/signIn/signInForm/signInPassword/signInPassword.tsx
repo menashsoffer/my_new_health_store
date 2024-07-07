@@ -3,6 +3,9 @@ import styles from './signInPassword.module.css';
 import { createUserAtom } from '../../../atom/userStore';
 import { useEffect } from 'react';
 
+const password = 'סיסמה';
+const confirmPassword = 'אשר סיסמה';
+
 const SignInPassword = () => {
   const [createUser, setUser] = useAtom(createUserAtom);
 
@@ -17,14 +20,14 @@ const SignInPassword = () => {
 
   return (
     <div className={styles['container']}>
-      <div className="mt-2 flex space-x-1" id="PasswordDiv">
+      <div className="mt-2 flex space-x-1" id="PasswordDiv" dir="rtl">
         <div className=" sm:w-full sm:max-w-sm space-x-1">
           <div className="flex items-center justify-between">
             <label
               htmlFor="password"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Password
+              {password}
             </label>
           </div>
           <div className="mt-2">
@@ -45,7 +48,7 @@ const SignInPassword = () => {
               htmlFor="confirmPassword"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Confirm password
+              {confirmPassword}
             </label>
           </div>
           <div className="mt-2">

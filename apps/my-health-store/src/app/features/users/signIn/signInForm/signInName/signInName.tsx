@@ -3,6 +3,9 @@ import styles from './signInName.module.css';
 import { createUserAtom } from '../../../atom/userStore';
 import { useEffect } from 'react';
 
+const firstname = 'שם פרטי';
+const lastName = 'שם משפחה';
+
 const SignInName = () => {
   const [createUser, setUser] = useAtom(createUserAtom);
 
@@ -16,14 +19,14 @@ const SignInName = () => {
   useEffect(() => {}, [createUser]);
   return (
     <div className={styles['container']}>
-      <div className="mt-2 flex space-x-1" id="nameDiv">
+      <div className="mt-2 flex space-x-1" id="nameDiv" dir="rtl">
         <div className=" sm:w-full sm:max-w-sm space-x-1">
           <div className="flex items-center justify-between">
             <label
               htmlFor="firstname"
               className="block text-sm font-medium leading-6 text-gray-900 "
             >
-              First name
+              {firstname}
             </label>
           </div>
           <div className="mt-2">
@@ -44,7 +47,7 @@ const SignInName = () => {
               htmlFor="lastname"
               className="block text-sm font-medium leading-6 text-gray-900 "
             >
-              Last name
+              {lastName}
             </label>
           </div>
           <div className="mt-2">

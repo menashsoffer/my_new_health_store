@@ -8,7 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import SignInButton from './signInForm/signInButton/SignInButton';
 import { useAtomValue } from 'jotai';
 import { createUserAtom } from '../atom/userStore';
-import { useEffect } from 'react';
+
+const createAccount = 'יצירת חשבון';
+const goBackToStore = '👈 חזרה לחנות';
 
 export function SignIn() {
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ export function SignIn() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Create your account
+            {createAccount}
           </h2>
         </div>
 
@@ -55,7 +57,7 @@ export function SignIn() {
               onClick={() => navigate('/')}
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Go back to store
+              {goBackToStore}
             </button>
           </div>
         </div>

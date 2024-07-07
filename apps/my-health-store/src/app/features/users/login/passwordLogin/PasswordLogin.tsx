@@ -15,29 +15,30 @@ export interface PasswordLoginProps {
   >;
 }
 
-export function PasswordLogin(props: PasswordLoginProps) {
+const password = 'סיסמה';
+const forgotPassword = 'שכחת סיסמה ?';
+export function PasswordLogin({ form, setForm }: PasswordLoginProps) {
   const navigate = useNavigate();
-  const form = props.form;
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.setForm({ ...form, [event.target.name]: event.target.value });
+    setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   return (
     <div className={styles['container']}>
       <div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between" dir="rtl">
           <label
             htmlFor="password"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Password
+            {password}
           </label>
           <div className="text-sm">
             <div
               onClick={() => navigate('/')}
-              className="font-semibold text-indigo-600 hover:text-indigo-500"
+              className="cursor-pointer font-semibold text-indigo-600 hover:text-indigo-500"
             >
-              Forgot password?
+              {forgotPassword}
             </div>
           </div>
         </div>
@@ -50,6 +51,7 @@ export function PasswordLogin(props: PasswordLoginProps) {
             required
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             onChange={changeHandler}
+            dir="rtl"
           />
         </div>
       </div>

@@ -6,6 +6,12 @@ import { useAtom } from 'jotai';
 import { cartNotFoundAtom } from '../atom/cartStore';
 import { useNavigate } from 'react-router-dom';
 
+const title = 'העגלה שלך כרגע ריקה';
+const message =
+  'העגלה שלך נראית קצת ריקה... בא נשנה את זה! עיין במוצרים שלנו ותמלא אותו';
+const buy = '!התחל בקניות';
+const close = 'סגור';
+
 const CartNotFound = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useAtom(cartNotFoundAtom);
@@ -46,24 +52,21 @@ const CartNotFound = () => {
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
-                      <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                        <ExclamationTriangleIcon
-                          className="h-6 w-6 text-red-600"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                      <div className="mt-3 flex flex-col items-center sm:ml-4 sm:mt-0 sm:text-left">
+                        <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                          <ExclamationTriangleIcon
+                            className="h-6 w-6 text-red-600"
+                            aria-hidden="true"
+                          />
+                        </div>
                         <Dialog.Title
                           as="h3"
-                          className="text-base font-semibold leading-6 text-gray-900"
+                          className="text-base font-semibold leading-6 text-gray-900 text-center"
                         >
-                          Your cart is currently empty
+                          {title}
                         </Dialog.Title>
-                        <div className="mt-2">
-                          <p className="text-sm text-gray-500">
-                            Your cart is looking a little empty... Let's change
-                            that! Peruse our products and fill 'er up.
-                          </p>
+                        <div className="mt-2 text-center">
+                          <p className="text-sm text-gray-500">{message}</p>
                         </div>
                       </div>
                     </div>
@@ -76,7 +79,7 @@ const CartNotFound = () => {
                         setOpen(false), navigate('/products');
                       }}
                     >
-                      Start shopping!
+                      {buy}
                     </button>
                     <button
                       type="button"
@@ -84,7 +87,7 @@ const CartNotFound = () => {
                       onClick={() => setOpen(false)}
                       ref={cancelButtonRef}
                     >
-                      Close
+                      {close}
                     </button>
                   </div>
                 </Dialog.Panel>

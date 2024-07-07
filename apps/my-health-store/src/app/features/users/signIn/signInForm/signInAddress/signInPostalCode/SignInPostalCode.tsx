@@ -3,6 +3,9 @@ import styles from './SignInPostalCode.module.css';
 import { createUserAtom } from '../../../../atom/userStore';
 import { useEffect } from 'react';
 
+const postalCode = 'תא דואר';
+const findPostalCode = 'מצא את הכתובת דואר כאן...';
+
 const SignInPostalCode = () => {
   const [createUser, setUser] = useAtom(createUserAtom);
 
@@ -22,7 +25,7 @@ const SignInPostalCode = () => {
             htmlFor="postalcode"
             className="block text-sm font-medium leading-6 text-gray-900 "
           >
-            Postal Code
+            {postalCode}
           </label>
           <div className="text-sm">
             <a
@@ -32,7 +35,7 @@ const SignInPostalCode = () => {
               rel="noreferrer"
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
-              מצא את הכתובת דואר כאן...
+              {findPostalCode}
             </a>
           </div>
         </div>

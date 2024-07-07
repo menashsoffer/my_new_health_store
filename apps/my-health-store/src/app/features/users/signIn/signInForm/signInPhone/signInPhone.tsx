@@ -3,6 +3,8 @@ import styles from './signInPhone.module.css';
 import { useEffect } from 'react';
 import { createUserAtom } from '../../../atom/userStore';
 
+const phonenumber = 'מספר טלפון';
+
 const SignInPhone = () => {
   const [createUser, setUser] = useAtom(createUserAtom);
 
@@ -18,13 +20,14 @@ const SignInPhone = () => {
     <div className={styles['container']}>
       <div
         id="phonenumberDiv"
+        dir="rtl"
         // className=" sm:mx-auto sm:w-full sm:max-w-sm "
       >
         <label
           htmlFor="phonenumber"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
-          Phone number
+          {phonenumber}
         </label>
         <div className="mt-2">
           <input

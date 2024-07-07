@@ -10,7 +10,7 @@ const stores = [
 ];
 
 const GeolocComp = () => {
-  const storeIcon = '../../../../../../public/storeIcon.svg';
+  const storeIcon = '../../../../../../storeIcon.svg';
   const popup = useRef<RPopup>(null);
   return (
     <>
